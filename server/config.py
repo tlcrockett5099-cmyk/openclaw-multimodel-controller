@@ -24,6 +24,12 @@ OLLAMA_DEFAULT_PORT = 11434
 class BackendType(str, Enum):
     lmstudio = "lmstudio"
     ollama = "ollama"
+    openai = "openai"
+    gemini = "gemini"
+    perplexity = "perplexity"
+
+
+CLOUD_BACKENDS = {BackendType.openai, BackendType.gemini, BackendType.perplexity}
 
 
 class ServerConfig(BaseModel):
@@ -37,6 +43,11 @@ class ServerConfig(BaseModel):
     # Ollama connection details
     ollama_host: str = Field(default=OLLAMA_DEFAULT_HOST)
     ollama_port: int = Field(default=OLLAMA_DEFAULT_PORT)
+
+    # Cloud service API keys (stored locally, never sent anywhere but the provider)
+    openai_api_key: Optional[str] = Field(default=None)
+    gemini_api_key: Optional[str] = Field(default=None)
+    perplexity_api_key: Optional[str] = Field(default=None)
 
     # Bind address / port for *this* proxy server
     bind_host: str = Field(default="0.0.0.0")

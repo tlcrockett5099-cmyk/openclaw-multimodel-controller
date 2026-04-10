@@ -13,9 +13,10 @@ import httpx
 from fastapi import APIRouter, HTTPException
 from fastapi.responses import StreamingResponse
 
-from config import BackendType, config
+from config import BackendType, CLOUD_BACKENDS, config
 import backends.lmstudio as lmstudio_backend
 import backends.ollama as ollama_backend
+import backends.cloud as cloud_backend
 
 router = APIRouter()
 
