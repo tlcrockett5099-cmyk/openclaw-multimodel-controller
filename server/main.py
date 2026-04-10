@@ -79,6 +79,14 @@ async def lifespan(app: FastAPI):
         print(f"[openclaw]   Ollama         : {'✓' if ol_ok else '✗'}")
 
     print(f"[openclaw] Web UI available at http://{config.bind_host}:{config.bind_port}/")
+
+    # Re-validate Pro tier on startup so stale tokens are refreshed immediately.
+    from pro import is_pro, revalidate_pro
+    if is_pro():
+        print("[openclaw] Revalidating Pro tier with Patreon…")
+        still_pro = await revalidate_pro()
+        print(f"[openclaw] {'✓ Pro verified.' if still_pro else '⚠ Pro could not be re-verified — reverted to free tier.'}")
+
     yield  # application runs here
 
 
@@ -114,7 +122,11 @@ app.add_middleware(
 
 async def verify_token(request: Request):
     if config.auth_token is None:
-        return  # Auth disabled
+        return  # Auth disabled globally
+    # The OAuth callback must be publicly reachable — Patreon's redirect does
+    # not include our Bearer token, so we exempt this path from auth.
+    if request.url.path == "/pro/oauth/callback":
+        return
     auth_header = request.headers.get("Authorization", "")
     if not auth_header.startswith("Bearer "):
         raise HTTPException(status_code=401, detail="Missing Bearer token")
