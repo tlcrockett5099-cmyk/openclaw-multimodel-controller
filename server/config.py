@@ -6,6 +6,8 @@ from __future__ import annotations
 
 import json
 import os
+import stat
+import tempfile
 from enum import Enum
 from pathlib import Path
 from typing import Optional
@@ -82,7 +84,33 @@ class ServerConfig(BaseModel):
         return f"http://{self.ollama_host}:{self.ollama_port}"
 
     def save(self) -> None:
-        CONFIG_PATH.write_text(self.model_dump_json(indent=2))
+        """Persist config to disk atomically with owner-only read/write permissions.
+
+        Uses a temp file + rename so a crash mid-write cannot corrupt the config.
+        File permissions are set to 0o600 (owner read/write only) on POSIX systems
+        so other users on the same machine cannot read stored API keys.
+        """
+        config_dir = CONFIG_PATH.parent
+        try:
+            fd, tmp_path = tempfile.mkstemp(dir=config_dir, suffix=".tmp")
+            try:
+                with os.fdopen(fd, "w") as f:
+                    f.write(self.model_dump_json(indent=2))
+                # Restrict permissions before moving into place
+                try:
+                    os.chmod(tmp_path, stat.S_IRUSR | stat.S_IWUSR)  # 0o600
+                except Exception:
+                    pass  # Non-POSIX filesystem (e.g. FAT32 on Windows) — skip
+                Path(tmp_path).replace(CONFIG_PATH)
+            except Exception:
+                try:
+                    os.unlink(tmp_path)
+                except Exception:
+                    pass
+                raise
+        except Exception:
+            # Fall back to simple write if atomic write fails (e.g. cross-device)
+            CONFIG_PATH.write_text(self.model_dump_json(indent=2))
 
     @classmethod
     def load(cls) -> "ServerConfig":

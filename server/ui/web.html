@@ -250,16 +250,17 @@
 
     .form-input:focus { outline: none; border-color: var(--blue); }
 
-    .backend-row { display: flex; gap: 10px; margin-top: 8px; }
+    .backend-row { display: flex; gap: 8px; margin-top: 6px; flex-wrap: wrap; }
 
     .backend-btn {
       flex: 1;
-      padding: 11px 0;
+      min-width: 80px;
+      padding: 10px 4px;
       border-radius: 8px;
       border: 2px solid var(--border);
       background: none;
       color: var(--muted);
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 600;
       cursor: pointer;
       transition: border-color .15s, color .15s, background .15s;
@@ -269,6 +270,41 @@
       border-color: var(--blue);
       color: var(--blue);
       background: rgba(74,144,217,.1);
+    }
+
+    .backend-group-label {
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      margin-top: 14px;
+      margin-bottom: 2px;
+    }
+
+    .key-hint {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 6px;
+      line-height: 1.5;
+    }
+
+    .privacy-note {
+      margin-top: 18px;
+      padding: 10px 12px;
+      border-radius: 8px;
+      background: rgba(76,175,80,.08);
+      border: 1px solid rgba(76,175,80,.2);
+      color: var(--green);
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .privacy-note code {
+      background: rgba(76,175,80,.15);
+      padding: 1px 4px;
+      border-radius: 3px;
+      font-family: monospace;
+      font-size: 11px;
     }
 
     .btn {
@@ -374,32 +410,74 @@
   <!-- ── Settings panel ────────────────────────────────────────────── -->
   <div id="settings-panel" class="panel">
 
+    <!-- Backend selection -->
     <div class="section-title">🔌 Backend</div>
 
+    <p class="backend-group-label">Local — runs on your PC</p>
     <div class="backend-row">
-      <button class="backend-btn active" id="btn-lmstudio" onclick="selectBackend('lmstudio')">
-        LM Studio
-      </button>
-      <button class="backend-btn" id="btn-ollama" onclick="selectBackend('ollama')">
-        Ollama
-      </button>
+      <button class="backend-btn active" id="btn-lmstudio" onclick="selectBackend('lmstudio')">LM Studio</button>
+      <button class="backend-btn" id="btn-ollama" onclick="selectBackend('ollama')">Ollama</button>
     </div>
 
-    <div class="section-title">🌐 LM Studio Connection</div>
-    <label class="form-label">Host</label>
-    <input class="form-input" id="lmstudio-host" value="localhost" />
-    <label class="form-label">Port</label>
-    <input class="form-input" id="lmstudio-port" value="1234" type="number" />
+    <p class="backend-group-label">Cloud services — use your own account</p>
+    <div class="backend-row">
+      <button class="backend-btn" id="btn-openai" onclick="selectBackend('openai')">OpenAI</button>
+      <button class="backend-btn" id="btn-gemini" onclick="selectBackend('gemini')">Gemini</button>
+      <button class="backend-btn" id="btn-perplexity" onclick="selectBackend('perplexity')">Perplexity</button>
+    </div>
 
-    <div class="section-title">🦙 Ollama Connection</div>
-    <label class="form-label">Host</label>
-    <input class="form-input" id="ollama-host" value="localhost" />
-    <label class="form-label">Port</label>
-    <input class="form-input" id="ollama-port" value="11434" type="number" />
+    <p class="backend-group-label">Any OpenAI-compatible endpoint</p>
+    <div class="backend-row">
+      <button class="backend-btn" id="btn-custom" onclick="selectBackend('custom')">⚙ Custom…</button>
+    </div>
 
-    <div class="section-title">🔐 Security</div>
-    <label class="form-label">Auth Token (optional — leave blank to disable)</label>
-    <input class="form-input" id="auth-token" type="password" placeholder="Enter token or leave blank" />
+    <!-- LM Studio connection (shown when lmstudio active) -->
+    <div id="section-lmstudio">
+      <div class="section-title">🌐 LM Studio Connection</div>
+      <label class="form-label">Host</label>
+      <input class="form-input" id="lmstudio-host" value="localhost" />
+      <label class="form-label">Port</label>
+      <input class="form-input" id="lmstudio-port" value="1234" type="number" />
+    </div>
+
+    <!-- Ollama connection (shown when ollama active) -->
+    <div id="section-ollama" style="display:none">
+      <div class="section-title">🦙 Ollama Connection</div>
+      <label class="form-label">Host</label>
+      <input class="form-input" id="ollama-host" value="localhost" />
+      <label class="form-label">Port</label>
+      <input class="form-input" id="ollama-port" value="11434" type="number" />
+    </div>
+
+    <!-- Cloud credentials (shown for openai / gemini / perplexity / custom) -->
+    <div id="section-cloud" style="display:none">
+      <div class="section-title">🔑 API Credentials</div>
+      <label class="form-label">API Key</label>
+      <input class="form-input" id="cloud-api-key" type="password"
+             placeholder="Paste your API key here" autocomplete="off" />
+      <p class="key-hint">Your key is saved only on this PC and sent only to the AI provider you chose — never to OpenClaw or anyone else.</p>
+
+      <!-- Custom-only fields -->
+      <div id="section-custom-fields" style="display:none">
+        <label class="form-label" style="margin-top:14px">Service name (display label)</label>
+        <input class="form-input" id="custom-name" placeholder="My AI Server" />
+        <label class="form-label">Base URL (OpenAI-compatible endpoint)</label>
+        <input class="form-input" id="custom-base-url" placeholder="https://api.example.com/v1" />
+      </div>
+    </div>
+
+    <!-- OpenClaw access token -->
+    <div class="section-title">🔐 OpenClaw Access Token</div>
+    <label class="form-label">Token (optional — protects this server from other LAN devices)</label>
+    <input class="form-input" id="auth-token" type="password"
+           placeholder="Enter token or leave blank" autocomplete="off" />
+
+    <!-- Privacy notice -->
+    <div class="privacy-note">
+      🛡️ Settings are stored locally on this PC in <code>server/config.json</code> only.
+      API keys go directly from this server to your AI provider — OpenClaw never logs,
+      collects, or shares your data.
+    </div>
 
     <button class="btn btn-outline" onclick="testConnection()">🔍 Test Connection</button>
     <div id="status-box"></div>
@@ -412,10 +490,24 @@
 <script>
 /* ── State ──────────────────────────────────────────────────────────── */
 const state = {
-  backend: 'lmstudio',
+  backend:     'lmstudio',
   activeModel: '',
-  messages: [],        // {role, content}
-  streaming: false,
+  customName:  'Custom',
+  apiKeySet:   {},      // { openai: bool, gemini: bool, perplexity: bool, custom: bool }
+  messages:    [],      // {role, content}
+  streaming:   false,
+};
+
+// Track which provider's API key field the user has edited this session.
+// We only send a key in the POST payload when the user actually typed one,
+// so saving without touching the key field never erases a stored key.
+const _apiKeyDirty = {};
+
+const CLOUD_BACKENDS   = new Set(['openai', 'gemini', 'perplexity', 'custom']);
+const ALL_BACKENDS     = ['lmstudio', 'ollama', 'openai', 'gemini', 'perplexity', 'custom'];
+const BACKEND_LABELS   = {
+  lmstudio: 'LM Studio', ollama: 'Ollama',
+  openai: 'OpenAI', gemini: 'Gemini', perplexity: 'Perplexity',
 };
 
 /* ── Tab switching ──────────────────────────────────────────────────── */
@@ -603,9 +695,34 @@ async function selectModel(id) {
 /* ── Settings ────────────────────────────────────────────────────────── */
 function selectBackend(b) {
   state.backend = b;
-  document.getElementById('btn-lmstudio').classList.toggle('active', b === 'lmstudio');
-  document.getElementById('btn-ollama').classList.toggle('active', b === 'ollama');
-  document.getElementById('backend-badge').textContent = b === 'lmstudio' ? 'LM Studio' : 'Ollama';
+  ALL_BACKENDS.forEach(id => {
+    const btn = document.getElementById('btn-' + id);
+    if (btn) btn.classList.toggle('active', id === b);
+  });
+  const label = b === 'custom'
+    ? (state.customName || 'Custom')
+    : (BACKEND_LABELS[b] || b);
+  document.getElementById('backend-badge').textContent = label;
+
+  // Show/hide connection sections
+  document.getElementById('section-lmstudio').style.display     = b === 'lmstudio' ? '' : 'none';
+  document.getElementById('section-ollama').style.display       = b === 'ollama'   ? '' : 'none';
+  document.getElementById('section-cloud').style.display        = CLOUD_BACKENDS.has(b) ? '' : 'none';
+  document.getElementById('section-custom-fields').style.display = b === 'custom'  ? '' : 'none';
+
+  // Update API key field placeholder based on saved state for this backend
+  _updateApiKeyPlaceholder();
+}
+
+function _updateApiKeyPlaceholder() {
+  const field = document.getElementById('cloud-api-key');
+  if (!field) return;
+  const b = state.backend;
+  if (_apiKeyDirty[b]) return;  // user is currently typing — don't disturb
+  field.value = '';
+  field.placeholder = state.apiKeySet[b]
+    ? '••••• Key saved — enter a new key to replace it'
+    : 'Paste your API key here';
 }
 
 async function loadSettingsFromServer() {
@@ -613,11 +730,31 @@ async function loadSettingsFromServer() {
     const resp = await fetch('/settings', { headers: apiHeaders() });
     if (!resp.ok) return;
     const s = await resp.json();
+
     selectBackend(s.backend);
     document.getElementById('lmstudio-host').value = s.lmstudio_host || 'localhost';
     document.getElementById('lmstudio-port').value = s.lmstudio_port || 1234;
     document.getElementById('ollama-host').value   = s.ollama_host   || 'localhost';
     document.getElementById('ollama-port').value   = s.ollama_port   || 11434;
+
+    // Custom endpoint (not secret — returned by server)
+    if (s.custom_base_url) document.getElementById('custom-base-url').value = s.custom_base_url;
+    if (s.custom_name) {
+      document.getElementById('custom-name').value = s.custom_name;
+      state.customName = s.custom_name;
+    }
+
+    // Record which providers have a key set — actual values never come back
+    state.apiKeySet = {
+      openai:     !!s.openai_api_key_set,
+      gemini:     !!s.gemini_api_key_set,
+      perplexity: !!s.perplexity_api_key_set,
+      custom:     !!s.custom_api_key_set,
+    };
+    // Clear dirty flags and refresh the placeholder for the current backend
+    ALL_BACKENDS.forEach(k => { _apiKeyDirty[k] = false; });
+    _updateApiKeyPlaceholder();
+
     if (s.active_model) {
       state.activeModel = s.active_model;
       document.getElementById('model-label').textContent = s.active_model;
@@ -626,14 +763,29 @@ async function loadSettingsFromServer() {
 }
 
 async function saveSettings() {
+  const b = state.backend;
   const payload = {
-    backend:        state.backend,
-    lmstudio_host:  document.getElementById('lmstudio-host').value.trim(),
-    lmstudio_port:  parseInt(document.getElementById('lmstudio-port').value, 10),
-    ollama_host:    document.getElementById('ollama-host').value.trim(),
-    ollama_port:    parseInt(document.getElementById('ollama-port').value, 10),
-    auth_token:     document.getElementById('auth-token').value.trim(),
+    backend:       b,
+    lmstudio_host: document.getElementById('lmstudio-host').value.trim(),
+    lmstudio_port: parseInt(document.getElementById('lmstudio-port').value, 10),
+    ollama_host:   document.getElementById('ollama-host').value.trim(),
+    ollama_port:   parseInt(document.getElementById('ollama-port').value, 10),
+    auth_token:    document.getElementById('auth-token').value.trim(),
   };
+
+  // Only include the API key if the user actually typed one this session.
+  // Leaving the field blank while saving must not erase a previously stored key.
+  if (CLOUD_BACKENDS.has(b) && _apiKeyDirty[b]) {
+    payload[b + '_api_key'] = document.getElementById('cloud-api-key').value.trim();
+  }
+
+  // Custom provider extras
+  if (b === 'custom') {
+    payload.custom_base_url = document.getElementById('custom-base-url').value.trim();
+    const cName = document.getElementById('custom-name').value.trim();
+    if (cName) { payload.custom_name = cName; state.customName = cName; }
+  }
+
   try {
     const resp = await fetch('/settings', {
       method: 'POST',
@@ -641,9 +793,19 @@ async function saveSettings() {
       body: JSON.stringify(payload),
     });
     if (!resp.ok) throw new Error('HTTP ' + resp.status);
+    const s = await resp.json();
+    // Refresh key-set state from server response
+    state.apiKeySet = {
+      openai:     !!s.openai_api_key_set,
+      gemini:     !!s.gemini_api_key_set,
+      perplexity: !!s.perplexity_api_key_set,
+      custom:     !!s.custom_api_key_set,
+    };
+    ALL_BACKENDS.forEach(k => { _apiKeyDirty[k] = false; });
+    _updateApiKeyPlaceholder();
     showStatus('ok', '✓ Settings saved.');
   } catch (e) {
-    showStatus('err', '✗ Failed to save: ' + e.message);
+    showStatus('err', '✗ Failed to save: ' + escapeHtml(e.message));
   }
 }
 
@@ -653,18 +815,22 @@ async function testConnection() {
     const resp = await fetch('/health');
     if (!resp.ok) throw new Error('HTTP ' + resp.status);
     const h = await resp.json();
-    const lm = h.lmstudio_available ? '✓' : '✗';
-    const ol = h.ollama_available   ? '✓' : '✗';
-    showStatus('ok',
-      '✓ Server reachable\n' +
-      'Active backend : ' + h.active_backend + '\n' +
-      'LM Studio      : ' + lm + '\n' +
-      'Ollama         : ' + ol +
-      (h.active_model ? '\nActive model   : ' + h.active_model : '')
-    );
+    const lm  = h.lmstudio_available ? '✓' : '✗';
+    const ol  = h.ollama_available   ? '✓' : '✗';
+    const isCloud = CLOUD_BACKENDS.has(h.active_backend);
+    let msg = '✓ Server reachable\n'
+      + 'Active backend : ' + escapeHtml(String(h.active_backend)) + '\n';
+    if (isCloud) {
+      msg += 'Cloud endpoint : ' + (h.cloud_available ? '✓ reachable' : '✗ unreachable') + '\n';
+    } else {
+      msg += 'LM Studio      : ' + lm + '\n'
+           + 'Ollama         : ' + ol + '\n';
+    }
+    if (h.active_model) msg += 'Active model   : ' + escapeHtml(String(h.active_model));
+    showStatus('ok', msg);
     selectBackend(h.active_backend);
   } catch (e) {
-    showStatus('err', '✗ Connection failed: ' + e.message);
+    showStatus('err', '✗ Connection failed: ' + escapeHtml(e.message));
   }
 }
 
@@ -684,6 +850,12 @@ function escapeHtml(s) {
 }
 
 /* ── Init ────────────────────────────────────────────────────────────── */
+// Mark the API key field dirty when the user types, so saveSettings() knows
+// to include (or clear) the key in the POST payload.
+document.getElementById('cloud-api-key').addEventListener('input', () => {
+  _apiKeyDirty[state.backend] = true;
+});
+
 (async function init() {
   // Load server settings to populate UI immediately
   await loadSettingsFromServer();
@@ -693,8 +865,6 @@ function escapeHtml(s) {
     if (resp.ok) {
       const h = await resp.json();
       selectBackend(h.active_backend);
-      document.getElementById('backend-badge').textContent =
-        h.active_backend === 'lmstudio' ? 'LM Studio' : 'Ollama';
       if (h.active_model) {
         state.activeModel = h.active_model;
         document.getElementById('model-label').textContent = h.active_model;
@@ -703,6 +873,7 @@ function escapeHtml(s) {
   } catch (_) {
     document.getElementById('backend-badge').textContent = 'offline';
   }
+  sendBtn.disabled = chatInput.value.trim() === '';
 })();
 </script>
 </body>

@@ -61,6 +61,11 @@ def _provider_info(provider: str) -> tuple[str, Optional[str]]:
     """Return (base_url, api_key) for the given provider name."""
     if provider == "custom":
         base_url = (config.custom_base_url or "").rstrip("/")
+        if base_url and not base_url.lower().startswith(("http://", "https://")):
+            raise ValueError(
+                "custom_base_url must start with http:// or https://. "
+                f"Got: {base_url!r}"
+            )
         return base_url, config.custom_api_key
     info = _PROVIDERS[provider]
     api_key: Optional[str] = getattr(config, f"{provider}_api_key", None)
