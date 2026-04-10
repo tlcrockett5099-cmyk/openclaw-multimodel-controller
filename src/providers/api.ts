@@ -9,7 +9,15 @@ export interface ChatCompletionPayload {
 
 function buildOpenAIPayload(provider: AIProvider, messages: Message[]): ChatCompletionPayload {
   const baseUrl = provider.baseUrl || 'https://api.openai.com/v1';
-  const msgs = messages.map((m) => ({ role: m.role, content: m.content }));
+  const msgs = messages.map((m) => ({
+    role: m.role,
+    content: m.imageUrl
+      ? [
+          { type: 'text', text: m.content },
+          { type: 'image_url', image_url: { url: m.imageUrl } },
+        ]
+      : m.content,
+  }));
 
   if (provider.systemPrompt) {
     msgs.unshift({ role: 'system', content: provider.systemPrompt });
@@ -39,7 +47,22 @@ function buildAnthropicPayload(provider: AIProvider, messages: Message[]): ChatC
   const baseUrl = provider.baseUrl || 'https://api.anthropic.com';
   const userMessages = messages
     .filter((m) => m.role !== 'system')
-    .map((m) => ({ role: m.role === 'assistant' ? 'assistant' : 'user', content: m.content }));
+    .map((m) => ({
+      role: m.role === 'assistant' ? 'assistant' : 'user',
+      content: m.imageUrl
+        ? [
+            { type: 'text', text: m.content },
+            {
+              type: 'image',
+              source: {
+                type: 'base64',
+                media_type: 'image/jpeg',
+                data: m.imageUrl.replace(/^data:image\/jpeg;base64,/, ''),
+              },
+            },
+          ]
+        : m.content,
+    }));
 
   return {
     url: `${baseUrl}/v1/messages`,
@@ -64,7 +87,12 @@ function buildGeminiPayload(provider: AIProvider, messages: Message[]): ChatComp
     .filter((m) => m.role !== 'system')
     .map((m) => ({
       role: m.role === 'assistant' ? 'model' : 'user',
-      parts: [{ text: m.content }],
+      parts: m.imageUrl
+        ? [
+            { text: m.content },
+            { inline_data: { mime_type: 'image/jpeg', data: m.imageUrl.replace(/^data:image\/jpeg;base64,/, '') } },
+          ]
+        : [{ text: m.content }],
     }));
 
   return {

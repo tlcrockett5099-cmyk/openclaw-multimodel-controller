@@ -275,7 +275,7 @@ export const SettingsPage: React.FC = () => {
             <div className="border border-amber-500/40 bg-amber-900/10 rounded-xl p-5 space-y-4">
               <div>
                 <p className="text-amber-300 font-semibold text-base">🌟 OpenClaw Pro — Unlock the full experience</p>
-                <p className="text-slate-400 text-xs mt-1">A $2+/month Patreon donation unlocks all Pro features.</p>
+                <p className="text-slate-400 text-xs mt-1">A $5+/month Patreon donation unlocks all Pro features.</p>
               </div>
               <ul className="space-y-1.5">
                 {PRO_FEATURES.map((f) => (

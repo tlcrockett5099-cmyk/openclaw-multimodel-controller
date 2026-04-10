@@ -418,7 +418,7 @@ export const HistoryPage: React.FC = () => {
             rel="noopener noreferrer"
             className="flex items-center gap-1.5 text-amber-400 hover:text-amber-300 transition-colors font-medium"
           >
-            🌟 Unlock unlimited with Pro ($2+/mo) →
+            🌟 Unlock unlimited with Pro ($5+/mo) →
           </a>
         </div>
       </div>

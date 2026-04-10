@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { v4 as uuidv4 } from 'uuid';
 import type { AIProvider, Conversation, Message, AppSettings, SystemPromptPreset } from '../types';
+import { FREE_VISION_LIMIT, FREE_TTS_CHAR_LIMIT } from '../constants';
 
 interface AppStore {
   // Providers
@@ -37,6 +38,14 @@ interface AppStore {
   // Active Provider for Chat
   activeChatProviderId: string | null;
   setActiveChatProvider: (id: string | null) => void;
+
+  // Vision usage tracking
+  canUseVision: () => boolean;
+  recordVisionUsage: () => void;
+
+  // TTS usage tracking
+  canUseTTS: (chars: number) => boolean;
+  recordTTSUsage: (chars: number) => void;
 }
 
 const DEFAULT_SETTINGS: AppSettings = {
@@ -47,6 +56,10 @@ const DEFAULT_SETTINGS: AppSettings = {
   streamResponses: false,
   density: 'cozy',
   isPro: false,
+  visionUsageToday: 0,
+  visionUsageDate: '',
+  ttsCharUsedToday: 0,
+  ttsUsageDate: '',
 };
 
 export const useStore = create<AppStore>()(
@@ -217,6 +230,40 @@ export const useStore = create<AppStore>()(
 
       updateSettings: (updates) => {
         set((state) => ({ settings: { ...state.settings, ...updates } }));
+      },
+
+      canUseVision: () => {
+        const { settings } = get();
+        const today = new Date().toISOString().slice(0, 10);
+        if (settings.visionUsageDate !== today) return true; // will reset on record
+        return settings.isPro || settings.visionUsageToday < FREE_VISION_LIMIT;
+      },
+
+      recordVisionUsage: () => {
+        const { settings } = get();
+        const today = new Date().toISOString().slice(0, 10);
+        if (settings.visionUsageDate !== today) {
+          set((state) => ({ settings: { ...state.settings, visionUsageToday: 1, visionUsageDate: today } }));
+        } else {
+          set((state) => ({ settings: { ...state.settings, visionUsageToday: state.settings.visionUsageToday + 1 } }));
+        }
+      },
+
+      canUseTTS: (chars: number) => {
+        const { settings } = get();
+        const today = new Date().toISOString().slice(0, 10);
+        if (settings.ttsUsageDate !== today) return true; // will reset on record
+        return settings.isPro || (settings.ttsCharUsedToday + chars) <= FREE_TTS_CHAR_LIMIT;
+      },
+
+      recordTTSUsage: (chars: number) => {
+        const { settings } = get();
+        const today = new Date().toISOString().slice(0, 10);
+        if (settings.ttsUsageDate !== today) {
+          set((state) => ({ settings: { ...state.settings, ttsCharUsedToday: chars, ttsUsageDate: today } }));
+        } else {
+          set((state) => ({ settings: { ...state.settings, ttsCharUsedToday: state.settings.ttsCharUsedToday + chars } }));
+        }
       },
     }),
     {

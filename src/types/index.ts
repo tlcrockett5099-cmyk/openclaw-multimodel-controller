@@ -34,6 +34,7 @@ export interface Message {
   error?: boolean;
   loading?: boolean;
   starred?: boolean;
+  imageUrl?: string; // base64 data URL of attached image (data:image/jpeg;base64,...)
 }
 
 export interface Conversation {
@@ -63,6 +64,10 @@ export interface AppSettings {
   density: 'compact' | 'cozy' | 'comfortable';
   isPro: boolean;
   accentColor?: string;
+  visionUsageToday: number;   // how many tap-to-identify calls used today (free tier)
+  visionUsageDate: string;    // ISO date string "YYYY-MM-DD" for daily reset
+  ttsCharUsedToday: number;   // TTS chars spoken today (free tier)
+  ttsUsageDate: string;       // ISO date string for daily reset
 }
 
 export interface ProviderTemplate {
