@@ -37,6 +37,8 @@ out/
 
 # OpenClaw runtime config — contains API keys; must never be committed
 server/config.json
+# Locally saved chat conversations
+server/conversations.json
 
 # Python cache
 __pycache__/

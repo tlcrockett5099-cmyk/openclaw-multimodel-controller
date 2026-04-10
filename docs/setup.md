@@ -15,9 +15,10 @@ This guide walks you through setting up the OpenClaw Multi-Model Controller from
 7. [Step 5 — Connect your phone to the server](#step-5--connect-your-phone-to-the-server)
 8. [Remote access via Tailscale](#remote-access-via-tailscale)
 9. [Cloud & paid AI services](#cloud--paid-ai-services)
-10. [Secure the server with an auth token](#secure-the-server-with-an-auth-token)
-11. [Privacy & data security](#privacy--data-security)
-12. [Troubleshooting](#troubleshooting)
+10. [Saving conversations locally](#saving-conversations-locally)
+11. [Secure the server with an auth token](#secure-the-server-with-an-auth-token)
+12. [Privacy & data security](#privacy--data-security)
+13. [Troubleshooting](#troubleshooting)
 
 ---
 
@@ -228,6 +229,36 @@ You can use OpenAI, Gemini, Perplexity, or any OpenAI-compatible API instead of 
 4. Click **💾 Save Settings**.
 
 → Full instructions including custom endpoints: [Cloud Services Guide](cloud-services-guide.md)
+
+---
+
+## Saving conversations locally
+
+OpenClaw lets you **optionally save specific conversations** to your PC's local storage.  No chats are saved automatically — you choose exactly which conversations to keep.
+
+### How to save a chat
+
+1. Have a conversation in the **💬 Chat** tab.
+2. Click **💾 Save** in the header.  The conversation is saved immediately to `server/conversations.json` on your PC.
+3. A brief "✓ Saved" confirmation appears in the button.
+
+### How to view and load saved chats
+
+1. Click the **📂 History** tab.
+2. All saved conversations are listed, most recent first, with the backend, model, message count, and time saved.
+3. Click any conversation to load it into the chat.  If you have an unsaved conversation open, you will be asked to confirm before it is replaced.
+
+### How to delete a saved chat
+
+In the **📂 History** tab, click the 🗑 button on any conversation to permanently delete it.
+
+### Privacy of saved chats
+
+- Conversations are stored in `server/conversations.json` on your PC only.
+- This file is **gitignored** — it is never committed to the repository.
+- On Unix systems (Linux/macOS) the file is set to owner-read-only (`0600`) permissions so other users on the machine cannot read your saved chats.
+- Saved chats are accessible from any device that can connect to your OpenClaw server (PC browser, phone browser, or Android app over LAN or Tailscale).
+- If you have an auth token set, the `/conversations` endpoints are protected by it — other people on your network cannot read or delete your saved chats without the token.
 
 ---
 

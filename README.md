@@ -33,6 +33,7 @@ OpenClaw is a lightweight Python server that proxies requests between your devic
 - **Android APK** — native mobile app built with React Native / Expo
 - **6 backends** — LM Studio, Ollama, OpenAI, Gemini, Perplexity, or any custom OpenAI-compatible URL
 - **Remote access via Tailscale** — connect from anywhere, fully encrypted, no port forwarding
+- **Optional saved conversations** — explicitly save any chat to local storage on your PC; load or delete from the History tab on any device
 - **Auto-detect** — switches to the available local backend automatically on startup
 - **Model selection** — browse and switch models without restarting
 - **Streaming** — real-time token streaming in both the web UI and Android app
@@ -164,6 +165,10 @@ openclaw-multimodel-controller/
 
 | Method | Endpoint | Auth | Description |
 |--------|----------|------|-------------|
+| `GET` | `/conversations` | Optional | List saved conversations (summaries, no messages) |
+| `GET` | `/conversations/{id}` | Optional | Load a saved conversation with full messages |
+| `POST` | `/conversations` | Optional | Save a conversation |
+| `DELETE` | `/conversations/{id}` | Optional | Delete a saved conversation |
 | `GET` | `/health` | No | Server status + backend availability |
 | `GET` | `/models` | Optional | List models from the active backend |
 | `POST` | `/chat/completions` | Optional | OpenAI-compatible chat endpoint |
@@ -240,6 +245,8 @@ Settings are stored in `server/config.json` on your PC and can be changed via th
 | [LM Studio Guide](docs/lmstudio-guide.md) | LM Studio specific setup |
 | [Ollama Guide](docs/ollama-guide.md) | Ollama specific setup |
 | Interactive API docs | `http://localhost:8080/docs` (once server is running) |
+
+> **Saving chats:** in the web UI, click **💾 Save** on the Chat tab to keep a conversation.  View, load, and delete saved chats from the **📂 History** tab on any device.
 
 ---
 

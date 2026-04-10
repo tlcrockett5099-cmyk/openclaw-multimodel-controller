@@ -9,6 +9,7 @@ OpenClaw is designed from the ground up so that **your data never leaves your co
 | Data | Where it lives | Who can access it |
 |------|---------------|-------------------|
 | Chat messages | In memory only — cleared on page refresh or "Clear" button | Only you, while the session is active |
+| Saved conversations | `server/conversations.json` on your PC (only when you explicitly click 💾 Save) | Only you (file is owner-read-only on Unix) |
 | Settings (hosts, ports) | `server/config.json` on your PC | Only you (file is owner-read-only on Unix) |
 | API keys | `server/config.json` on your PC | Only you — **never returned by the API**, never logged |
 | Model selection | `server/config.json` on your PC | Only you |
@@ -24,6 +25,7 @@ OpenClaw **does not**:
 
 - Send telemetry, analytics, or crash reports anywhere.
 - Log chat messages or prompt content.
+- Automatically save any conversation — saving is always an explicit user action (clicking 💾 Save).
 - Phone home to any OpenClaw server.
 - Require an internet connection to function (for local backends).
 - Share your API keys with any party other than the AI provider you explicitly chose.
@@ -51,13 +53,14 @@ Your browser  →  POST /settings  →  OpenClaw server  (key stored in config.j
 
 ---
 
-## config.json security
+## config.json and conversations.json security
 
-`server/config.json` contains your settings and any stored API keys.
+`server/config.json` contains your settings and any stored API keys.  
+`server/conversations.json` contains any conversations you explicitly chose to save.
 
-- **File permissions:** on Unix systems (Linux, macOS), OpenClaw automatically sets the file to `0600` (owner read/write only) when saving.  Other users on the same machine cannot read it.
-- **Git protection:** `server/config.json` is listed in `.gitignore`.  It will never be committed to your repository, preventing accidental exposure of API keys if you fork or push this project.
-- **Backup advice:** if you back up your PC, treat `config.json` like a passwords file — store the backup encrypted.
+- **File permissions:** on Unix systems (Linux, macOS), OpenClaw automatically sets both files to `0600` (owner read/write only) when saving.  Other users on the same machine cannot read them.
+- **Git protection:** both files are listed in `.gitignore`.  They will never be committed to your repository, preventing accidental exposure.
+- **Backup advice:** treat both files like sensitive personal data — store backups encrypted.
 
 ---
 
