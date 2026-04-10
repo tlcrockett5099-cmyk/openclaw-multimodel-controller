@@ -1,7 +1,7 @@
 """
 /pro  — Pro tier status and activation endpoints.
 
-Users who donate $2+ on Patreon can activate Pro directly from
+Users who donate $5+ on Patreon can activate Pro directly from
 Settings in the web UI, or by manually creating server/pro.json.
 """
 
@@ -32,7 +32,7 @@ class ActivateRequest(BaseModel):
 def activate(body: ActivateRequest):
     """Activate the Pro tier by writing pro.json.
 
-    Users should only call this after donating $2+ on Patreon.
+    Users should only call this after donating $5+ on Patreon.
     Honour-system: the server writes the file locally; no remote
     verification is performed.
     """

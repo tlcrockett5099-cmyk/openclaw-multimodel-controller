@@ -3,7 +3,7 @@ Pro tier — unlocked by placing a  pro.json  file in the server directory.
 
 How to unlock
 ─────────────
-1. Donate $2 or more on Patreon:
+1. Donate $5 or more on Patreon:
    https://patreon.com/TLG3D?utm_medium=unknown&utm_source=join_link
        &utm_campaign=creatorshare_creator&utm_content=copyLink
 
