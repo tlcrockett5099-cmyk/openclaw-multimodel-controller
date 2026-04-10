@@ -27,9 +27,16 @@ class BackendType(str, Enum):
     openai = "openai"
     gemini = "gemini"
     perplexity = "perplexity"
+    # Any OpenAI-compatible endpoint (self-hosted, Azure, LiteLLM proxy, etc.)
+    custom = "custom"
 
 
-CLOUD_BACKENDS = {BackendType.openai, BackendType.gemini, BackendType.perplexity}
+CLOUD_BACKENDS = {
+    BackendType.openai,
+    BackendType.gemini,
+    BackendType.perplexity,
+    BackendType.custom,
+}
 
 
 class ServerConfig(BaseModel):
@@ -44,10 +51,18 @@ class ServerConfig(BaseModel):
     ollama_host: str = Field(default=OLLAMA_DEFAULT_HOST)
     ollama_port: int = Field(default=OLLAMA_DEFAULT_PORT)
 
-    # Cloud service API keys (stored locally, never sent anywhere but the provider)
+    # Cloud service API keys (stored locally in config.json on your PC only —
+    # never sent to OpenClaw servers or any third party; forwarded only to the
+    # provider whose backend is currently selected).
     openai_api_key: Optional[str] = Field(default=None)
     gemini_api_key: Optional[str] = Field(default=None)
     perplexity_api_key: Optional[str] = Field(default=None)
+
+    # Custom / self-hosted OpenAI-compatible endpoint
+    custom_base_url: Optional[str] = Field(default=None)
+    custom_api_key: Optional[str] = Field(default=None)
+    # Human-readable label shown in the UI for the custom provider
+    custom_name: Optional[str] = Field(default="Custom")
 
     # Bind address / port for *this* proxy server
     bind_host: str = Field(default="0.0.0.0")
