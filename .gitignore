@@ -37,3 +37,8 @@ out/
 
 # OpenClaw runtime config — contains API keys; must never be committed
 server/config.json
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
