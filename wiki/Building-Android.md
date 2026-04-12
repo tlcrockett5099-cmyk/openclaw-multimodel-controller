@@ -1,12 +1,12 @@
 # Building for Android (Google Play Store)
 
-> Complete guide to building Openclaw for Android and submitting to Google Play
+> Complete guide to building AI-MC for Android and submitting to Google Play
 
 ---
 
 ## Overview
 
-Openclaw uses **Expo EAS Build** for the React Native Android app and **Capacitor** for the web-based Android app. This guide covers both.
+AI-MC uses **Expo EAS Build** for the React Native Android app and **Capacitor** for the web-based Android app. This guide covers both.
 
 ---
 
@@ -27,11 +27,11 @@ Edit `android/app.json`:
 ```json
 {
   "expo": {
-    "name": "Openclaw",
-    "slug": "openclaw-android",
+    "name": "AI-MC",
+    "slug": "ai-multimodel-controller",
     "version": "1.0.0",
     "android": {
-      "package": "com.openclaw.controller",
+      "package": "com.com.aimc.controller",
       "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
@@ -141,8 +141,8 @@ Store listing metadata is in `store/google-play/metadata/en-US/`.
 ### Submission Steps
 
 1. Go to [Google Play Console](https://play.google.com/console)
-2. Create new app → "Openclaw MultiModel Controller"
-3. Package name: `com.openclaw.controller`
+2. Create new app → "AI-Multimodel-Controller"
+3. Package name: `com.com.aimc.controller`
 4. Set up store listing (use files in `store/google-play/metadata/en-US/`)
 5. Upload your signed `.aab`
 6. Complete content rating questionnaire

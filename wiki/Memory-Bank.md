@@ -1,6 +1,6 @@
 # Memory Bank
 
-> Inline memory saving and management in Openclaw v1.1.0
+> Inline memory saving and management in AI-MC v1.1.0
 
 ---
 
@@ -50,7 +50,7 @@ Other actions:
 
 ## How Memories Work in Conversations
 
-When you send a message, Openclaw prepends your saved memories to the conversation context. The AI "knows" everything in your Memory Bank.
+When you send a message, AI-MC prepends your saved memories to the conversation context. The AI "knows" everything in your Memory Bank.
 
 **Example workflow:**
 1. Save memory: *"I'm building a React + FastAPI app for pet owners"*
@@ -79,7 +79,7 @@ When you send a message, Openclaw prepends your saved memories to the conversati
 ## Privacy
 
 All memories are stored in **browser localStorage / device storage** only. They are:
-- Never sent to any Openclaw server
+- Never sent to any AI-MC server
 - Only shared with the AI provider you're actively chatting with, as inline context
 - Exportable at any time (export the conversation that contains them)
 - Fully deletable at any time

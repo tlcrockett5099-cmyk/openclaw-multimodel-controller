@@ -89,7 +89,7 @@ export const SettingsPage: React.FC = () => {
     <div className="flex flex-col h-full overflow-hidden">
       <div className="px-6 py-4 shrink-0" style={{ borderBottom: '1px solid var(--oc-border)', background: 'var(--oc-surface)' }}>
         <h1 className="text-xl font-bold text-white">Settings</h1>
-        <p className="text-slate-400 text-sm mt-0.5">Customize your Openclaw experience</p>
+        <p className="text-slate-400 text-sm mt-0.5">Customize your AI-MC experience</p>
       </div>
 
       <div className="flex-1 overflow-y-auto px-6 py-6 space-y-8 max-w-2xl">
@@ -510,12 +510,12 @@ export const SettingsPage: React.FC = () => {
                 <span className="text-slate-500 text-xs">· Official LLC Logo</span>
               </div>
               <p className="text-slate-400 text-xs leading-relaxed">
-                Openclaw MultiModel Controller is designed and maintained by <strong className="text-white">SerThrocken</strong>.
+                AI-Multimodel-Controller is designed and maintained by <strong className="text-white">SerThrocken</strong>.
                 All rights reserved. The spiral logo above is the official LLC logo of SerThrocken.
               </p>
               <div className="flex flex-wrap gap-2 pt-1">
                 <a
-                  href="https://github.com/SerThrocken/openclaw-multimodel-controller"
+                  href="https://github.com/SerThrocken/ai-multimodel-controller"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-blue-400 hover:text-blue-300 text-xs transition-colors"
@@ -541,7 +541,7 @@ export const SettingsPage: React.FC = () => {
           <div className="oc-card p-4 flex gap-3">
             <Info size={20} className="text-blue-400 shrink-0 mt-0.5" />
             <div>
-              <p className="text-white font-medium text-sm">Openclaw MultiModel Controller</p>
+              <p className="text-white font-medium text-sm">AI-Multimodel-Controller</p>
               <p className="text-slate-400 text-xs mt-1">Version 1.0.0 · by SerThrocken</p>
               <p className="text-slate-400 text-xs mt-2">
                 A cross-platform AI chat controller supporting multiple AI providers including
@@ -550,7 +550,7 @@ export const SettingsPage: React.FC = () => {
               </p>
               <div className="flex flex-wrap gap-3 mt-3">
                 <a
-                  href="https://github.com/SerThrocken/openclaw-multimodel-controller"
+                  href="https://github.com/SerThrocken/ai-multimodel-controller"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-blue-400 hover:text-blue-300 text-xs transition-colors"
@@ -558,7 +558,7 @@ export const SettingsPage: React.FC = () => {
                   GitHub Repository →
                 </a>
                 <a
-                  href="https://github.com/SerThrocken/openclaw-multimodel-controller/wiki"
+                  href="https://github.com/SerThrocken/ai-multimodel-controller/wiki"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-blue-400 hover:text-blue-300 text-xs transition-colors"

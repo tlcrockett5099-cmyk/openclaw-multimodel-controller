@@ -1,8 +1,8 @@
 {
-  "name": "openclaw-multimodel-controller",
+  "name": "ai-multimodel-controller",
   "private": true,
   "version": "1.0.0",
-  "description": "Openclaw Multi-Model AI Controller - Android & Desktop App",
+  "description": "AI-MC Multi-Model AI Controller - Android & Desktop App",
   "type": "module",
   "main": "electron/main.cjs",
   "scripts": {
@@ -12,14 +12,14 @@
     "preview": "vite preview",
     "electron:dev": "concurrently \"BROWSER=none vite\" \"wait-on http://localhost:5173 && electron .\"",
     "electron:build": "npm run build && electron-builder",
-    "cap:init": "cap init openclaw-multimodel-controller com.openclaw.multimodel",
+    "cap:init": "cap init ai-multimodel-controller com.aimc.controller",
     "cap:add:android": "cap add android",
     "cap:sync": "cap sync",
     "cap:open:android": "cap open android"
   },
   "build": {
-    "appId": "com.openclaw.multimodel",
-    "productName": "Openclaw MultiModel Controller",
+    "appId": "com.aimc.controller",
+    "productName": "AI-Multimodel-Controller",
     "files": [
       "dist/**/*",
       "electron/**/*"

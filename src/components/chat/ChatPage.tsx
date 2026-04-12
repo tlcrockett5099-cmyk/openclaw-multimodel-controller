@@ -359,7 +359,7 @@ export const ChatPage: React.FC = () => {
                 />
               </div>
               <div>
-                <h3 className="text-2xl font-bold text-white tracking-tight">Openclaw</h3>
+                <h3 className="text-2xl font-bold text-white tracking-tight">AI-MC</h3>
                 <p className="text-slate-400 text-sm mt-1">
                   {activeProvider ? `${activeProvider.name} · ${activeProvider.model}` : 'Select a provider to begin'}
                 </p>
@@ -376,7 +376,7 @@ export const ChatPage: React.FC = () => {
                   </button>
                 ))}
               </div>
-              <p className="text-slate-700 text-xs mt-2">Openclaw · SerThrocken/openclaw-multimodel-controller</p>
+              <p className="text-slate-700 text-xs mt-2">AI-MC · SerThrocken/ai-multimodel-controller</p>
             </div>
           ) : (
             activeConversation.messages.map((msg) => (

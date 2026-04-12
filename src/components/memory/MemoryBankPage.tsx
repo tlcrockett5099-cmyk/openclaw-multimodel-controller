@@ -126,7 +126,7 @@ export const MemoryBankPage: React.FC = () => {
         )}
 
         <p className="text-center text-slate-700 text-xs pb-4">
-          Memory Bank — Openclaw by SerThrocken
+          Memory Bank — AI-MC by SerThrocken
         </p>
       </div>
     </div>

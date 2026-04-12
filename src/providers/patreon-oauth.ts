@@ -1,5 +1,5 @@
 /**
- * Patreon OAuth helper for Openclaw Pro verification.
+ * Patreon OAuth helper for AI-MC Pro verification.
  * Uses the Python backend /pro/oauth/start → /pro/oauth/callback flow.
  * If the backend is not running, falls back to direct Patreon link.
  */

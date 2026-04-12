@@ -1,13 +1,13 @@
-# Contributing to Openclaw
+# Contributing to AI-MC
 
-> SerThrocken/openclaw-multimodel-controller
+> SerThrocken/ai-multimodel-controller
 
 ---
 
 ## Project Structure
 
 ```
-openclaw-multimodel-controller/
+ai-multimodel-controller/
 ├── src/                        # Main React + TypeScript + Tailwind app
 │   ├── components/
 │   │   ├── camera/             # Live camera view
@@ -107,7 +107,7 @@ Free skills should have `proOnly: false`. Add sparingly — the current free set
 
 ## Reporting Bugs
 
-Open an issue at [github.com/SerThrocken/openclaw-multimodel-controller/issues](https://github.com/SerThrocken/openclaw-multimodel-controller/issues) with:
+Open an issue at [github.com/SerThrocken/ai-multimodel-controller/issues](https://github.com/SerThrocken/ai-multimodel-controller/issues) with:
 - Steps to reproduce
 - Expected vs actual behaviour
 - Browser / OS / platform info

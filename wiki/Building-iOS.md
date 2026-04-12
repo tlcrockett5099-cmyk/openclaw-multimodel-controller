@@ -1,12 +1,12 @@
 # Building for iOS (Apple App Store)
 
-> Complete guide to building Openclaw for iOS and submitting to the App Store
+> Complete guide to building AI-MC for iOS and submitting to the App Store
 
 ---
 
 ## Overview
 
-Openclaw supports iOS through two approaches:
+AI-MC supports iOS through two approaches:
 1. **Expo EAS Build** — easiest, cloud-based
 2. **Capacitor + Xcode** — full native control
 
@@ -34,11 +34,11 @@ Edit `android/app.json` to add iOS config:
 ```json
 {
   "expo": {
-    "name": "Openclaw",
-    "slug": "openclaw-android",
+    "name": "AI-MC",
+    "slug": "ai-multimodel-controller",
     "version": "1.0.0",
     "ios": {
-      "bundleIdentifier": "com.openclaw.controller",
+      "bundleIdentifier": "com.com.aimc.controller",
       "buildNumber": "1",
       "supportsTablet": true,
       "infoPlist": {
@@ -48,7 +48,7 @@ Edit `android/app.json` to add iOS config:
       }
     },
     "android": {
-      "package": "com.openclaw.controller"
+      "package": "com.com.aimc.controller"
     }
   }
 }
@@ -147,7 +147,7 @@ npx cap open ios
 1. Select the `App` target
 2. Go to **Signing & Capabilities**
 3. Set your **Team** (Apple Developer account)
-4. Set **Bundle Identifier**: `com.openclaw.controller`
+4. Set **Bundle Identifier**: `com.com.aimc.controller`
 5. Update **Version** and **Build** numbers
 
 ### 5. Add App Icons
@@ -201,8 +201,8 @@ Store listing metadata is in `store/apple-store/metadata/en-US/`.
 1. Go to [App Store Connect](https://appstoreconnect.apple.com)
 2. Click **+** → New App
 3. Platform: iOS
-4. Name: "Openclaw MultiModel Controller"
-5. Bundle ID: `com.openclaw.controller`
+4. Name: "AI-Multimodel-Controller"
+5. Bundle ID: `com.com.aimc.controller`
 6. Fill in metadata from `store/apple-store/metadata/en-US/`
 7. Upload screenshots
 8. Upload your `.ipa` via Xcode or Transporter

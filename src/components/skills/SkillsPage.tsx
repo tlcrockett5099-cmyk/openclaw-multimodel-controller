@@ -285,7 +285,7 @@ export const SkillsPage: React.FC = () => {
 
         {/* Attribution */}
         <p className="text-center text-xs pb-4" style={{ color: 'rgba(100,116,139,0.4)' }}>
-          Skill library by SerThrocken · openclaw-multimodel-controller
+          Skill library by SerThrocken · ai-multimodel-controller
         </p>
       </div>
     </div>

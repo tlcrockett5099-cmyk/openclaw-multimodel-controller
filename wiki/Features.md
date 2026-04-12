@@ -1,13 +1,13 @@
 # Features
 
-> **Openclaw MultiModel Controller v1.1.0** — Complete Feature Reference  
+> **AI-Multimodel-Controller v1.1.0** — Complete Feature Reference  
 > Created by SerThrocken (SerThrocken LLC)
 
 ---
 
 ## 🎨 Claw OS Interface
 
-Openclaw ships with a fully custom visual identity unique to this application:
+AI-MC ships with a fully custom visual identity unique to this application:
 
 | Element | Design |
 |---------|--------|

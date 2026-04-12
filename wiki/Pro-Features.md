@@ -1,12 +1,12 @@
 # Pro Features & Patreon
 
-> Unlocking Openclaw Pro in v1.1.0
+> Unlocking AI-MC Pro in v1.1.0
 
 ---
 
 ## What Is Pro?
 
-**Openclaw Pro** unlocks the full feature set with a **$5+/month pledge** on [Patreon](https://patreon.com/TLG3D). Pro is verified automatically via Patreon OAuth (with the backend server) or activated manually via the honor system.
+**AI-MC Pro** unlocks the full feature set with a **$5+/month pledge** on [Patreon](https://patreon.com/TLG3D). Pro is verified automatically via Patreon OAuth (with the backend server) or activated manually via the honor system.
 
 ---
 
@@ -119,7 +119,7 @@ When Pro is active:
 
 ## Why Support on Patreon?
 
-Openclaw is built and maintained solo by **SerThrocken**. Every pledge directly funds:
+AI-MC is built and maintained solo by **SerThrocken**. Every pledge directly funds:
 - New features and integrations
 - Bug fixes and security patches
 - App Store & Play Store review fees

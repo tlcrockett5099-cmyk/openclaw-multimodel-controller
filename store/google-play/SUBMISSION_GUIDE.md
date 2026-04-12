@@ -1,5 +1,5 @@
 # Google Play Store Submission Guide
-# Openclaw MultiModel Controller
+# AI-Multimodel-Controller
 # Created by SerThrocken (SerThrocken LLC)
 
 ---
@@ -8,8 +8,8 @@
 
 | Field | Value |
 |-------|-------|
-| App Name | Openclaw MultiModel Controller |
-| Package Name | com.openclaw.controller |
+| App Name | AI-Multimodel-Controller |
+| Package Name | com.com.aimc.controller |
 | Category | Productivity |
 | Content Rating | Everyone |
 | Price | Free |
@@ -30,7 +30,7 @@
 - [ ] Tested on Android 8.0+ (API 26+)
 
 ### Store Listing
-- [ ] Title: Openclaw MultiModel Controller (copy from title.txt)
+- [ ] Title: AI-Multimodel-Controller (copy from title.txt)
 - [ ] Short description: (copy from short_description.txt)
 - [ ] Full description: (copy from full_description.txt)
 - [ ] App category: Productivity
@@ -59,7 +59,7 @@
 
 Create a 1024×500 image with:
 - Dark background (#0f172a)
-- Openclaw logo centered
+- AI-MC logo centered
 - Tagline: "Chat with all your AI models in one app"
 - Provider logos (OpenAI, Claude, Gemini, etc.) arranged below
 - App screenshot on the right side

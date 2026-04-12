@@ -1,6 +1,6 @@
 # Troubleshooting
 
-> Common issues and solutions for Openclaw MultiModel Controller v1.1.0
+> Common issues and solutions for AI-Multimodel-Controller v1.1.0
 
 ---
 
@@ -114,7 +114,7 @@ npm run dev -- --port 5174
 ## Memory Bank Issues
 
 ### Memories not persisting after refresh
-- Openclaw stores memories in browser localStorage — this data is cleared if you clear site data
+- AI-MC stores memories in browser localStorage — this data is cleared if you clear site data
 - Private/incognito browsing does not persist localStorage across sessions
 - Use a regular browser session for persistent memories
 
@@ -175,6 +175,6 @@ pod install
 
 ## Getting Help
 
-1. **GitHub Issues**: [github.com/SerThrocken/openclaw-multimodel-controller/issues](https://github.com/SerThrocken/openclaw-multimodel-controller/issues)
+1. **GitHub Issues**: [github.com/SerThrocken/ai-multimodel-controller/issues](https://github.com/SerThrocken/ai-multimodel-controller/issues)
 2. **Patreon (Pro supporters get priority response)**: [patreon.com/TLG3D](https://patreon.com/TLG3D)
 3. **Wiki**: Check other pages for detailed guides

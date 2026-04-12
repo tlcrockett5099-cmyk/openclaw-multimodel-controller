@@ -1,5 +1,5 @@
 # Apple App Store Submission Guide
-# Openclaw MultiModel Controller
+# AI-Multimodel-Controller
 # Created by SerThrocken (SerThrocken LLC)
 
 ---
@@ -8,9 +8,9 @@
 
 | Field | Value |
 |-------|-------|
-| App Name | Openclaw MultiModel Controller |
-| Subtitle | Openclaw — MultiModel AI Chat |
-| Bundle ID | com.openclaw.controller |
+| App Name | AI-Multimodel-Controller |
+| Subtitle | AI-Multimodel-Controller — MultiModel AI Chat |
+| Bundle ID | com.com.aimc.controller |
 | Category | Productivity |
 | Secondary Category | Utilities |
 | Content Rating | 4+ |
@@ -49,12 +49,12 @@ npx cap open ios
 ```
 
 ### Store Listing
-- [ ] App name: Openclaw MultiModel Controller (max 30 chars)
-- [ ] Subtitle: Openclaw — MultiModel AI Chat (max 30 chars)
+- [ ] App name: AI-Multimodel-Controller (max 30 chars)
+- [ ] Subtitle: AI-Multimodel-Controller — MultiModel AI Chat (max 30 chars)
 - [ ] Description: (copy from description.txt)
 - [ ] Keywords: (copy from keywords.txt — max 100 chars total)
 - [ ] What's New: (copy from release_notes.txt)
-- [ ] Support URL: github.com/SerThrocken/openclaw-multimodel-controller
+- [ ] Support URL: github.com/SerThrocken/ai-multimodel-controller
 - [ ] Privacy Policy URL: (required — host publicly)
 - [ ] Contact info for App Review
 

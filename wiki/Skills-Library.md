@@ -1,6 +1,6 @@
 # Skills Library
 
-> AI Skills and Gemini Gems in Openclaw MultiModel Controller v1.1.0
+> AI Skills and Gemini Gems in AI-Multimodel-Controller v1.1.0
 
 ---
 
@@ -17,7 +17,7 @@ Examples:
 
 ## Free vs. Pro Skills
 
-Openclaw offers **61 built-in skills** total:
+AI-MC offers **61 built-in skills** total:
 
 | Tier | Count | Access |
 |------|-------|--------|
@@ -147,7 +147,7 @@ Custom skills appear in the grid alongside built-in skills and can be activated 
 
 ## Upgrade to Unlock All Skills
 
-Support Openclaw on Patreon to unlock all 51 Pro skills:
+Support AI-MC on Patreon to unlock all 51 Pro skills:
 
 🔗 [patreon.com/TLG3D](https://patreon.com/TLG3D) — $5+/month
 

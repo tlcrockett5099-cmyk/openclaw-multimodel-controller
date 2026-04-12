@@ -1,12 +1,12 @@
 # AI Connections Guide
 
-> How to connect AI providers to Openclaw MultiModel Controller
+> How to connect AI providers to AI-Multimodel-Controller
 
 ---
 
 ## Overview
 
-Openclaw connects to AI providers through their APIs. Each connection stores:
+AI-MC connects to AI providers through their APIs. Each connection stores:
 - Provider type (OpenAI, Claude, Gemini, etc.)
 - API key (or OAuth token)
 - Selected model
@@ -32,7 +32,7 @@ Openclaw connects to AI providers through their APIs. Each connection stores:
 ### 🤖 OpenAI (GPT-4o, o1, o3)
 
 1. Get an API key from [platform.openai.com/api-keys](https://platform.openai.com/api-keys)
-2. In Openclaw: Connections → Add → OpenAI
+2. In AI-MC: Connections → Add → OpenAI
 3. Paste your API key
 4. Choose model: `gpt-4o` (recommended), `gpt-4o-mini`, `o1`, `o3-mini`
 5. Save and enable
@@ -44,7 +44,7 @@ Openclaw connects to AI providers through their APIs. Each connection stores:
 ### 🟠 Claude (Anthropic)
 
 1. Get an API key from [console.anthropic.com](https://console.anthropic.com/settings/keys)
-2. In Openclaw: Connections → Add → Claude (Anthropic)
+2. In AI-MC: Connections → Add → Claude (Anthropic)
 3. Paste your API key
 4. Choose model: `claude-opus-4-5` (best), `claude-sonnet-4-5` (balanced), `claude-haiku-4-5` (fast)
 
@@ -56,7 +56,7 @@ Openclaw connects to AI providers through their APIs. Each connection stores:
 
 #### Option A: API Key
 1. Get a free API key from [aistudio.google.com](https://aistudio.google.com/app/apikey)
-2. In Openclaw: Connections → Add → Google Gemini
+2. In AI-MC: Connections → Add → Google Gemini
 3. Paste your API key
 4. Choose model: `gemini-2.0-flash` (recommended), `gemini-2.5-pro-preview-06-05`
 
@@ -73,7 +73,7 @@ Openclaw connects to AI providers through their APIs. Each connection stores:
 ### 🔍 Perplexity
 
 1. Get an API key from [perplexity.ai/settings/api](https://www.perplexity.ai/settings/api)
-2. In Openclaw: Connections → Add → Perplexity
+2. In AI-MC: Connections → Add → Perplexity
 3. Paste your API key
 4. Choose model: `llama-3.1-sonar-large-128k-online` (best), `sonar-small` (fast/cheap)
 
@@ -85,7 +85,7 @@ Openclaw connects to AI providers through their APIs. Each connection stores:
 
 1. Install Ollama from [ollama.com](https://ollama.com)
 2. Pull a model: `ollama pull llama3.2`
-3. In Openclaw: Connections → Add → Ollama (Local)
+3. In AI-MC: Connections → Add → Ollama (Local)
 4. Base URL: `http://localhost:11434` (default)
 5. Choose model from the list or type a model name
 
@@ -98,7 +98,7 @@ Openclaw connects to AI providers through their APIs. Each connection stores:
 ### 🔀 OpenRouter (Access 200+ Models)
 
 1. Get an API key from [openrouter.ai/keys](https://openrouter.ai/keys)
-2. In Openclaw: Connections → Add → OpenRouter
+2. In AI-MC: Connections → Add → OpenRouter
 3. Paste your API key
 4. Choose model — supports models from OpenAI, Anthropic, Google, Meta, Mistral, and more
 
@@ -116,7 +116,7 @@ Works with any server that follows the OpenAI API format:
 - **Kobold.cpp**, **text-generation-webui**, etc.
 
 1. Start your local server (default: `http://localhost:8080`)
-2. In Openclaw: Connections → Add → Custom
+2. In AI-MC: Connections → Add → Custom
 3. Set the Base URL to your server address
 4. Set the model name as configured in your server
 
@@ -127,7 +127,7 @@ Works with any server that follows the OpenAI API format:
 After adding a connection:
 1. Open it in the Connections list
 2. Click the **Test** button (⚡ icon)
-3. Openclaw will send a test message and show ✅ or ❌
+3. AI-MC will send a test message and show ✅ or ❌
 
 ---
 

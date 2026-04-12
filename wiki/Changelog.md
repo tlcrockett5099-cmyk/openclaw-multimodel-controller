@@ -1,6 +1,6 @@
 # Changelog
 
-> Openclaw MultiModel Controller — Version History
+> AI-Multimodel-Controller — Version History
 
 ---
 
@@ -82,4 +82,4 @@
 
 ---
 
-*Openclaw MultiModel Controller © SerThrocken LLC*
+*AI-Multimodel-Controller © SerThrocken LLC*

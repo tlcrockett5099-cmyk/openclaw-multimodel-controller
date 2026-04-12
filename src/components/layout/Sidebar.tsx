@@ -50,7 +50,7 @@ export const Sidebar: React.FC = () => {
           <Zap size={18} className="text-white" />
         </div>
         <div>
-          <div className="font-bold text-sm oc-gradient-text">Openclaw</div>
+          <div className="font-bold text-sm oc-gradient-text">AI-MC</div>
           <div className="text-xs" style={{ color: 'var(--oc-muted)' }}>MultiModel Controller</div>
         </div>
         <button onClick={() => setMobileOpen(false)} className="ml-auto p-1 rounded-lg hover:bg-white/5" style={{ color: 'var(--oc-muted)' }}>

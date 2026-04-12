@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Openclaw MultiModel Controller",
+    "name": "AI-Multimodel-Controller",
     "slug": "openclaw-multimodel",
     "version": "1.1.0",
     "orientation": "portrait",
@@ -15,12 +15,12 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.openclaw.controller",
+      "bundleIdentifier": "com.com.aimc.controller",
       "buildNumber": "1",
       "infoPlist": {
-        "NSCameraUsageDescription": "Openclaw uses the camera for live AI visual analysis.",
-        "NSMicrophoneUsageDescription": "Openclaw uses the microphone for voice input to AI.",
-        "NSPhotoLibraryUsageDescription": "Openclaw accesses your photo library to attach images to AI conversations.",
+        "NSCameraUsageDescription": "AI-MC uses the camera for live AI visual analysis.",
+        "NSMicrophoneUsageDescription": "AI-MC uses the microphone for voice input to AI.",
+        "NSPhotoLibraryUsageDescription": "AI-MC accesses your photo library to attach images to AI conversations.",
         "ITSAppUsesNonExemptEncryption": false
       },
       "config": {
@@ -38,7 +38,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#0f172a"
       },
-      "package": "com.openclaw.controller",
+      "package": "com.com.aimc.controller",
       "versionCode": 1,
       "permissions": [
         "INTERNET",
@@ -67,7 +67,7 @@
     },
     "extra": {
       "eas": {
-        "projectId": "openclaw-multimodel-controller"
+        "projectId": "ai-multimodel-controller"
       }
     },
     "owner": "serthrocken",

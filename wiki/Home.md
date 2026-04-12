@@ -1,18 +1,18 @@
-# Openclaw MultiModel Controller — Wiki
+# AI-Multimodel-Controller — Wiki
 
 > **Created & Maintained by SerThrocken (SerThrocken LLC)**
-> Repository: [SerThrocken/openclaw-multimodel-controller](https://github.com/SerThrocken/openclaw-multimodel-controller)
+> Repository: [SerThrocken/ai-multimodel-controller](https://github.com/SerThrocken/ai-multimodel-controller)
 
 ---
 
-Welcome to the official wiki for **Openclaw MultiModel Controller** — a cross-platform AI chat application with a completely unique **Claw OS** dark tech interface. Connect to OpenAI, Claude, Gemini, Perplexity, Ollama, OpenRouter, and more — all in one place.
+Welcome to the official wiki for **AI-Multimodel-Controller** — a cross-platform AI chat application with a completely unique **Claw OS** dark tech interface. Connect to OpenAI, Claude, Gemini, Perplexity, Ollama, OpenRouter, and more — all in one place.
 
 ## 📚 Table of Contents
 
 | Page | Description |
 |------|-------------|
 | [Home](Home) | Overview and quick start |
-| [Installation & Setup](Installation) | Install and run Openclaw on any platform |
+| [Installation & Setup](Installation) | Install and run AI-MC on any platform |
 | [Features](Features) | Complete feature reference |
 | [AI Connections Guide](Connections-Guide) | Connect AI providers |
 | [Skills Library](Skills-Library) | AI Skills, Gemini Gems, Pro gating |
@@ -29,8 +29,8 @@ Welcome to the official wiki for **Openclaw MultiModel Controller** — a cross-
 ## ⚡ Quick Start
 
 ```bash
-git clone https://github.com/SerThrocken/openclaw-multimodel-controller.git
-cd openclaw-multimodel-controller
+git clone https://github.com/SerThrocken/ai-multimodel-controller.git
+cd ai-multimodel-controller
 npm install
 npm run dev
 ```
@@ -39,9 +39,9 @@ Open **http://localhost:5173** — the app loads with the Claw OS interface.
 
 ---
 
-## 🎨 What Makes Openclaw Different
+## 🎨 What Makes AI-MC Different
 
-Openclaw v1.1.0 ships with a fully custom **Claw OS** visual identity that no other AI app has:
+AI-MC v1.1.0 ships with a fully custom **Claw OS** visual identity that no other AI app has:
 
 | Design Feature | Description |
 |----------------|-------------|
@@ -76,5 +76,5 @@ Openclaw v1.1.0 ships with a fully custom **Claw OS** visual identity that no ot
 
 ---
 
-*Openclaw MultiModel Controller v1.1.0 © SerThrocken LLC. All rights reserved.*
+*AI-Multimodel-Controller v1.1.0 © SerThrocken LLC. All rights reserved.*
 

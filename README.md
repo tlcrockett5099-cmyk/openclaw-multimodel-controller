@@ -116,7 +116,7 @@ After installing the APK, open the app → **Settings** → enter your PC's IP a
 ## Repository Structure
 
 ```
-openclaw-multimodel-controller/
+ai-multimodel-controller/
 │
 ├── server/                  # Python / FastAPI PC server
 │   ├── main.py              # Entry point — run this

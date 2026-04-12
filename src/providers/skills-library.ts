@@ -1,5 +1,5 @@
-// Openclaw MultiModel Controller — Skills Library
-// Created by SerThrocken (SerThrocken/openclaw-multimodel-controller)
+// AI-Multimodel-Controller — Skills Library
+// Created by SerThrocken (SerThrocken/ai-multimodel-controller)
 // Curated skill prompts for AI model specialization
 
 import type { Skill } from '../types';

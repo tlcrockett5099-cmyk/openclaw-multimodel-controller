@@ -1,4 +1,4 @@
-🤖 Openclaw MultiModel Controller — The Ultimate AI Chat Hub
+🤖 AI-Multimodel-Controller — The Ultimate AI Chat Hub
 
 Chat with ALL your favorite AI models from one beautiful app. Switch between OpenAI GPT-4o, Claude, Google Gemini, Perplexity, Ollama (local/offline), OpenRouter, and any custom OpenAI-compatible API — all in one place.
 
@@ -70,7 +70,7 @@ Support at: patreon.com/TLG3D
 • API keys never leave your device
 • No account required to use
 • Your conversations are yours — export anytime
-• Open source: github.com/SerThrocken/openclaw-multimodel-controller
+• Open source: github.com/SerThrocken/ai-multimodel-controller
 
 Created by SerThrocken (SerThrocken LLC)
 Open source · Community-driven · Privacy-first

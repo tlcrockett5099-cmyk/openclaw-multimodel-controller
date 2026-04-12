@@ -1,6 +1,6 @@
 # Installation & Setup
 
-> **Openclaw MultiModel Controller v1.1.0** · by SerThrocken
+> **AI-Multimodel-Controller v1.1.0** · by SerThrocken
 
 ---
 
@@ -21,8 +21,8 @@
 
 ```bash
 # 1. Clone
-git clone https://github.com/SerThrocken/openclaw-multimodel-controller.git
-cd openclaw-multimodel-controller
+git clone https://github.com/SerThrocken/ai-multimodel-controller.git
+cd ai-multimodel-controller
 
 # 2. Install
 npm install
@@ -84,7 +84,7 @@ If the server is not running, all AI features still work — only Patreon OAuth 
 ## 📱 Android
 
 ### Option A: Download APK (easiest)
-Download the latest APK from the [Releases](https://github.com/SerThrocken/openclaw-multimodel-controller/releases) page and install directly on your Android device.
+Download the latest APK from the [Releases](https://github.com/SerThrocken/ai-multimodel-controller/releases) page and install directly on your Android device.
 
 ### Option B: EAS Build
 ```bash
