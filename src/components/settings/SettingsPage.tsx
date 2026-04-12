@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useStore } from '../../store';
-import { Info, Trash2, Plus, Lock } from 'lucide-react';
+import { Info, Trash2, Plus, Lock, Brain, Sparkles } from 'lucide-react';
 import { PATREON_URL } from '../../constants';
 import { useToast } from '../../context/ToastContext';
+import { startPatreonOAuth, checkProStatus } from '../../providers/patreon-oauth';
 
 const THEMES = [
   { id: 'dark', label: 'Dark', dot: '#1e293b', proOnly: false },
@@ -36,11 +38,15 @@ export const SettingsPage: React.FC = () => {
     systemPromptPresets,
     addPreset,
     deletePreset,
+    memories,
+    removeMemory,
   } = useStore();
 
+  const navigate = useNavigate();
   const [showAddPreset, setShowAddPreset] = useState(false);
   const [presetName, setPresetName] = useState('');
   const [presetPrompt, setPresetPrompt] = useState('');
+  const [patreonLoading, setPatreonLoading] = useState(false);
   const toast = useToast();
 
   const stats = {
@@ -60,11 +66,30 @@ export const SettingsPage: React.FC = () => {
 
   const canAddPreset = settings.isPro || systemPromptPresets.length < 1;
 
+  const handlePatreonConnect = async (isCreator = false) => {
+    setPatreonLoading(true);
+    try {
+      await startPatreonOAuth(isCreator);
+      const status = await checkProStatus();
+      if (status.isPro) {
+        updateSettings({ isPro: true, patreonConnected: true, patreonName: status.name });
+        toast.success(`🌟 Pro activated! Welcome, ${status.name || 'supporter'}!`);
+      } else {
+        updateSettings({ patreonConnected: true, patreonName: status.name });
+        toast.success('Connected to Patreon!');
+      }
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : 'Patreon connection failed.');
+    } finally {
+      setPatreonLoading(false);
+    }
+  };
+
   return (
     <div className="flex flex-col h-full overflow-hidden">
-      <div className="px-6 py-4 border-b border-slate-700 bg-slate-900">
+      <div className="px-6 py-4 shrink-0" style={{ borderBottom: '1px solid var(--oc-border)', background: 'var(--oc-surface)' }}>
         <h1 className="text-xl font-bold text-white">Settings</h1>
-        <p className="text-slate-400 text-sm mt-0.5">Customize your Openclaw experience</p>
+        <p className="text-slate-400 text-sm mt-0.5">Customize your AI-MC experience</p>
       </div>
 
       <div className="flex-1 overflow-y-auto px-6 py-6 space-y-8 max-w-2xl">
@@ -92,13 +117,13 @@ export const SettingsPage: React.FC = () => {
                         settings.theme === theme.id
                           ? 'bg-blue-600 border-blue-600 text-white'
                           : locked
-                          ? 'bg-slate-800 border-slate-700 text-slate-500 cursor-not-allowed'
-                          : 'bg-slate-800 border-slate-600 text-slate-400 hover:border-slate-500 hover:text-white'
+                          ? 'rounded-lg border text-slate-500 cursor-not-allowed'
+                          : 'rounded-lg border text-slate-400 hover:text-white'
                       }`}
                     >
                       <span
-                        className="w-3 h-3 rounded-full border border-slate-600 shrink-0"
-                        style={{ backgroundColor: theme.dot }}
+                        className="w-3 h-3 rounded-full border shrink-0"
+                        style={{ borderColor: "var(--oc-border)", backgroundColor: theme.dot }}
                       />
                       {locked ? <Lock size={12} className="mr-0.5" /> : null}
                       {theme.label}
@@ -128,7 +153,7 @@ export const SettingsPage: React.FC = () => {
                     className={`px-4 py-2 rounded-lg text-sm border transition-colors capitalize ${
                       settings.density === d
                         ? 'bg-blue-600 border-blue-600 text-white'
-                        : 'bg-slate-800 border-slate-600 text-slate-400 hover:border-slate-500 hover:text-white'
+                        : 'rounded-lg border text-slate-400 hover:text-white'
                     }`}
                   >
                     {d}
@@ -148,7 +173,7 @@ export const SettingsPage: React.FC = () => {
                     className={`px-4 py-2 rounded-lg text-sm border transition-colors ${
                       settings.fontSize === size
                         ? 'bg-blue-600 border-blue-600 text-white'
-                        : 'bg-slate-800 border-slate-600 text-slate-400 hover:border-slate-500 hover:text-white'
+                        : 'rounded-lg border text-slate-400 hover:text-white'
                     }`}
                   >
                     {size === 'sm' ? 'Small' : size === 'md' ? 'Medium' : 'Large'}
@@ -188,7 +213,7 @@ export const SettingsPage: React.FC = () => {
             {systemPromptPresets.map((preset) => (
               <div
                 key={preset.id}
-                className="flex items-start gap-3 bg-slate-800 border border-slate-700 rounded-xl px-4 py-3"
+                className="flex items-start gap-3 oc-card px-4 py-3"
               >
                 <div className="flex-1 min-w-0">
                   <div className="text-sm text-white font-medium">{preset.name}</div>
@@ -206,20 +231,20 @@ export const SettingsPage: React.FC = () => {
 
             {canAddPreset ? (
               showAddPreset ? (
-                <div className="bg-slate-800 border border-slate-700 rounded-xl p-4 space-y-3">
+                <div className="oc-card p-4 space-y-3">
                   <input
                     type="text"
                     value={presetName}
                     onChange={(e) => setPresetName(e.target.value)}
                     placeholder="Preset name"
-                    className="w-full bg-slate-700 border border-slate-600 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-blue-500"
+                    className="w-full rounded-lg px-3 py-2 text-sm focus:outline-none" style={{ background: "var(--oc-surface2)", border: "1px solid var(--oc-border)", color: "var(--oc-text)" }}
                   />
                   <textarea
                     value={presetPrompt}
                     onChange={(e) => setPresetPrompt(e.target.value)}
                     placeholder="System prompt text…"
                     rows={3}
-                    className="w-full bg-slate-700 border border-slate-600 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-blue-500 resize-none"
+                    className="w-full rounded-lg px-3 py-2 text-sm focus:outline-none resize-none" style={{ background: "var(--oc-surface2)", border: "1px solid var(--oc-border)", color: "var(--oc-text)" }}
                   />
                   <div className="flex gap-2">
                     <button
@@ -231,7 +256,7 @@ export const SettingsPage: React.FC = () => {
                     </button>
                     <button
                       onClick={() => { setShowAddPreset(false); setPresetName(''); setPresetPrompt(''); }}
-                      className="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-slate-300 text-sm rounded-lg transition-colors"
+                      className="px-4 py-2 text-sm rounded-lg transition-colors" style={{ background: "var(--oc-surface2)", border: "1px solid var(--oc-border)", color: "var(--oc-muted)" }}
                     >
                       Cancel
                     </button>
@@ -240,7 +265,7 @@ export const SettingsPage: React.FC = () => {
               ) : (
                 <button
                   onClick={() => setShowAddPreset(true)}
-                  className="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 border border-slate-600 border-dashed text-slate-400 hover:text-white text-sm rounded-xl transition-colors"
+                  className="flex items-center gap-2 px-4 py-2 text-sm rounded-xl transition-colors" style={{ background: "var(--oc-surface2)", border: "1px dashed var(--oc-border)", color: "var(--oc-muted)" }}
                 >
                   <Plus size={14} /> Add Preset
                 </button>
@@ -268,7 +293,7 @@ export const SettingsPage: React.FC = () => {
               <p className="text-slate-400 text-xs">Verified via Patreon donation</p>
               <button
                 onClick={() => updateSettings({ isPro: false })}
-                className="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-slate-300 text-sm rounded-lg transition-colors"
+                className="px-4 py-2 text-sm rounded-lg transition-colors" style={{ background: "var(--oc-surface2)", border: "1px solid var(--oc-border)", color: "var(--oc-muted)" }}
               >
                 Deactivate Pro
               </button>
@@ -314,7 +339,7 @@ export const SettingsPage: React.FC = () => {
         <section>
           <h2 className="text-sm font-semibold text-slate-300 uppercase tracking-wide mb-4">Integrations</h2>
           <div className="space-y-3">
-            <div className="bg-slate-800 border border-slate-700 rounded-xl p-4 space-y-3">
+            <div className="oc-card p-4 space-y-3">
               <div className="flex items-start gap-3">
                 <span className="text-2xl">✨</span>
                 <div className="flex-1">
@@ -331,7 +356,7 @@ export const SettingsPage: React.FC = () => {
                 value={settings.googleClientId || ''}
                 onChange={e => updateSettings({ googleClientId: e.target.value })}
                 placeholder="xxxx.apps.googleusercontent.com"
-                className="w-full bg-slate-700 border border-slate-600 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-blue-500 font-mono"
+                className="w-full rounded-lg px-3 py-2 text-sm focus:outline-none font-mono" style={{ background: "var(--oc-surface2)", border: "1px solid var(--oc-border)", color: "var(--oc-text)" }}
               />
             </div>
           </div>
@@ -348,14 +373,14 @@ export const SettingsPage: React.FC = () => {
                 { label: 'Chats', value: stats.conversations },
                 { label: 'Messages', value: stats.messages },
               ].map((stat) => (
-                <div key={stat.label} className="bg-slate-800 rounded-xl p-4 text-center border border-slate-700">
+                <div key={stat.label} className="oc-card rounded-xl p-4 text-center">
                   <div className="text-2xl font-bold text-white">{stat.value}</div>
                   <div className="text-slate-400 text-xs mt-0.5">{stat.label}</div>
                 </div>
               ))}
             </div>
           ) : (
-            <div className="bg-slate-800 border border-slate-700 rounded-xl p-4 text-center">
+            <div className="oc-card p-4 text-center">
               <p className="text-slate-400 text-sm">
                 🔒 Full statistics available with{' '}
                 <a href={PATREON_URL} target="_blank" rel="noopener noreferrer" className="text-amber-400 hover:underline">
@@ -367,27 +392,178 @@ export const SettingsPage: React.FC = () => {
           )}
         </section>
 
+        {/* Patreon OAuth */}
+        <section>
+          <h2 className="text-sm font-semibold text-slate-300 uppercase tracking-wide mb-4">Patreon</h2>
+          <div className="oc-card p-4 space-y-3">
+            <div className="flex items-center gap-2">
+              <span className="text-orange-400 text-lg">❤</span>
+              <div>
+                <p className="text-white text-sm font-medium">Connect with Patreon</p>
+                <p className="text-slate-400 text-xs mt-0.5">
+                  {settings.patreonConnected
+                    ? `Connected as ${settings.patreonName || 'Patreon user'}`
+                    : 'Not connected'}
+                </p>
+              </div>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              <button
+                onClick={() => handlePatreonConnect(false)}
+                disabled={patreonLoading}
+                className="px-4 py-2 bg-orange-600 hover:bg-orange-700 disabled:opacity-50 text-white text-sm rounded-lg transition-colors"
+              >
+                {patreonLoading ? 'Connecting…' : '❤ Connect with Patreon'}
+              </button>
+              <button
+                onClick={() => handlePatreonConnect(true)}
+                disabled={patreonLoading}
+                className="px-3 py-2 disabled:opacity-50 text-xs rounded-lg transition-colors" style={{ background: "var(--oc-surface2)", border: "1px solid var(--oc-border)", color: "var(--oc-muted)" }}
+              >
+                I am the creator/developer
+              </button>
+            </div>
+          </div>
+        </section>
+
+        {/* Memory Bank */}
+        <section>
+          <h2 className="text-sm font-semibold text-slate-300 uppercase tracking-wide mb-4">Memory Bank</h2>
+          <div className="oc-card p-4 space-y-3">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Brain size={16} className="text-purple-400" />
+                <span className="text-white text-sm">{memories.length} memories saved</span>
+              </div>
+              <button
+                onClick={() => navigate('/memory')}
+                className="px-3 py-1.5 bg-purple-600 hover:bg-purple-700 text-white text-xs rounded-lg transition-colors"
+              >
+                Open Memory Bank →
+              </button>
+            </div>
+            {memories.length > 0 && (
+              <button
+                onClick={() => {
+                  if (confirm('Clear all memories? This cannot be undone.')) {
+                    memories.forEach((m) => removeMemory(m.id));
+                    toast.success('All memories cleared.');
+                  }
+                }}
+                className="text-xs text-red-400 hover:text-red-300 transition-colors"
+              >
+                Clear all memories
+              </button>
+            )}
+          </div>
+        </section>
+
+        {/* Skills */}
+        <section>
+          <h2 className="text-sm font-semibold text-slate-300 uppercase tracking-wide mb-4">Skills</h2>
+          <div className="oc-card p-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Sparkles size={16} className="text-blue-400" />
+                <span className="text-white text-sm">
+                  {(settings.activeSkillIds || []).length} active skills
+                </span>
+              </div>
+              <button
+                onClick={() => navigate('/skills')}
+                className="px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs rounded-lg transition-colors"
+              >
+                Browse Skills →
+              </button>
+            </div>
+          </div>
+        </section>
+
+        {/* Credits */}
+        <section>
+          <h2 className="text-sm font-semibold text-slate-300 uppercase tracking-wide mb-4">Credits &amp; Creator</h2>
+          <div className="oc-card overflow-hidden">
+            {/* LLC Logo Banner */}
+            <div className="relative w-full h-36 bg-gradient-to-br from-green-900/40 to-emerald-900/40 flex items-center justify-center overflow-hidden">
+              <img
+                src="https://github.com/user-attachments/assets/6947d2ec-824a-41e9-84aa-ac66086c7b28"
+                alt="SerThrocken LLC Logo"
+                className="h-full w-full object-contain"
+                onError={(e) => {
+                  (e.target as HTMLImageElement).style.display = 'none';
+                  const fallback = document.getElementById('llc-logo-fallback');
+                  if (fallback) fallback.style.display = 'flex';
+                }}
+              />
+              <div
+                id="llc-logo-fallback"
+                className="absolute inset-0 items-center justify-center hidden"
+              >
+                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center shadow-lg">
+                  <span className="text-white text-2xl font-bold">S</span>
+                </div>
+              </div>
+            </div>
+            <div className="p-4 space-y-2">
+              <div className="flex items-center gap-2">
+                <span className="text-emerald-400 text-base font-bold">SerThrocken LLC</span>
+                <span className="text-slate-500 text-xs">· Official LLC Logo</span>
+              </div>
+              <p className="text-slate-400 text-xs leading-relaxed">
+                AI-Multimodel-Controller is designed and maintained by <strong className="text-white">SerThrocken</strong>.
+                All rights reserved. The spiral logo above is the official LLC logo of SerThrocken.
+              </p>
+              <div className="flex flex-wrap gap-2 pt-1">
+                <a
+                  href="https://github.com/SerThrocken/ai-multimodel-controller"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-400 hover:text-blue-300 text-xs transition-colors"
+                >
+                  GitHub →
+                </a>
+                <a
+                  href={PATREON_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-amber-400 hover:text-amber-300 text-xs transition-colors"
+                >
+                  Patreon →
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* About */}
         <section>
           <h2 className="text-sm font-semibold text-slate-300 uppercase tracking-wide mb-4">About</h2>
-          <div className="bg-slate-800 border border-slate-700 rounded-xl p-4 flex gap-3">
+          <div className="oc-card p-4 flex gap-3">
             <Info size={20} className="text-blue-400 shrink-0 mt-0.5" />
             <div>
-              <p className="text-white font-medium text-sm">Openclaw MultiModel Controller</p>
-              <p className="text-slate-400 text-xs mt-1">Version 1.0.0</p>
+              <p className="text-white font-medium text-sm">AI-Multimodel-Controller</p>
+              <p className="text-slate-400 text-xs mt-1">Version 1.0.0 · by SerThrocken</p>
               <p className="text-slate-400 text-xs mt-2">
                 A cross-platform AI chat controller supporting multiple AI providers including
                 OpenAI, Claude, Gemini, Perplexity, Ollama, and more.
-                Available as Android APK and Desktop (PC/Mac/Linux) application.
+                Available as Android (Play Store), iOS (App Store), and Desktop (PC/Mac/Linux).
               </p>
-              <div className="flex gap-3 mt-3">
+              <div className="flex flex-wrap gap-3 mt-3">
                 <a
-                  href="https://github.com/tlcrockett5099-cmyk/openclaw-multimodel-controller"
+                  href="https://github.com/SerThrocken/ai-multimodel-controller"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-blue-400 hover:text-blue-300 text-xs transition-colors"
                 >
                   GitHub Repository →
+                </a>
+                <a
+                  href="https://github.com/SerThrocken/ai-multimodel-controller/wiki"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-400 hover:text-blue-300 text-xs transition-colors"
+                >
+                  Wiki / Docs →
                 </a>
               </div>
             </div>
@@ -404,7 +580,7 @@ const ToggleSetting: React.FC<{
   checked: boolean;
   onChange: (value: boolean) => void;
 }> = ({ label, description, checked, onChange }) => (
-  <div className="flex items-center justify-between bg-slate-800 border border-slate-700 rounded-xl px-4 py-3">
+  <div className="flex items-center justify-between oc-card px-4 py-3">
     <div>
       <div className="text-sm text-white font-medium">{label}</div>
       {description && <div className="text-xs text-slate-400 mt-0.5">{description}</div>}

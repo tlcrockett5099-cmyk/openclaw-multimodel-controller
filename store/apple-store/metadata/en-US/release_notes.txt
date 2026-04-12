@@ -1,0 +1,6 @@
+• NEW: Skills Library with 55+ AI skills and Gemini Gems
+• NEW: Memory Bank — save information from conversations as context
+• NEW: Patreon OAuth for automatic Pro verification
+• IMPROVED: Redesigned UI with swipe-up conversation list on iPhone
+• IMPROVED: Animated empty chat screen with suggestion chips
+• IMPROVED: Better space utilization on iPhone and iPad

@@ -1,71 +1,239 @@
 @import "tailwindcss";
 
-* {
-  box-sizing: border-box;
+/* ═══════════════════════════════════════════════════════════
+   OPENCLAW DESIGN SYSTEM
+   Created by SerThrocken — SerThrocken/ai-multimodel-controller
+   ═══════════════════════════════════════════════════════════ */
+
+:root {
+  --oc-bg:           #020914;
+  --oc-surface:      #070f1f;
+  --oc-surface2:     #0d1a2e;
+  --oc-surface3:     #0a1628;
+  --oc-border:       #1a3a4a;
+  --oc-border2:      rgba(20,184,166,0.18);
+  --oc-teal:         #14b8a6;
+  --oc-cyan:         #06b6d4;
+  --oc-teal-dark:    #0d9488;
+  --oc-teal-glow:    rgba(20,184,166,0.25);
+  --oc-cyan-glow:    rgba(6,182,212,0.2);
+  --oc-text:         #e2e8f0;
+  --oc-muted:        #64748b;
+  --oc-pro:          #f59e0b;
+  --oc-pro-glow:     rgba(245,158,11,0.2);
 }
+
+* { box-sizing: border-box; }
 
 html, body, #root {
   height: 100%;
   margin: 0;
   padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+  font-family: 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: var(--oc-bg);
+  color: var(--oc-text);
 }
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-::-webkit-scrollbar-thumb {
-  background: #334155;
-  border-radius: 3px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #475569;
+/* ── Dot-grid background ──────────────────────────────────────── */
+.oc-bg-grid {
+  background-color: var(--oc-bg);
+  background-image:
+    radial-gradient(circle, rgba(20,184,166,0.12) 1px, transparent 1px);
+  background-size: 28px 28px;
 }
 
-/* ── Custom scrollbar ─────────────────────────────────────────── */
-* { scrollbar-width: thin; scrollbar-color: #334155 transparent; }
-*::-webkit-scrollbar { width: 5px; height: 5px; }
+/* ── Glassmorphism ────────────────────────────────────────────── */
+.oc-glass {
+  background: rgba(7,15,31,0.82);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(20,184,166,0.15);
+}
+.oc-glass-strong {
+  background: rgba(13,26,46,0.92);
+  backdrop-filter: blur(24px) saturate(200%);
+  -webkit-backdrop-filter: blur(24px) saturate(200%);
+  border: 1px solid rgba(20,184,166,0.25);
+}
+
+/* ── Teal glow effects ────────────────────────────────────────── */
+.oc-glow-teal {
+  box-shadow: 0 0 20px var(--oc-teal-glow), 0 0 40px rgba(20,184,166,0.1);
+}
+.oc-glow-teal-sm {
+  box-shadow: 0 0 10px var(--oc-teal-glow);
+}
+.oc-glow-cyan {
+  box-shadow: 0 0 20px var(--oc-cyan-glow);
+}
+.oc-glow-pro {
+  box-shadow: 0 0 20px var(--oc-pro-glow);
+}
+
+/* ── Corner-cut clip (claw aesthetic) ────────────────────────── */
+.oc-clip-br {
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%);
+}
+.oc-clip-tr {
+  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 0 100%);
+}
+
+/* ── Neon border ──────────────────────────────────────────────── */
+.oc-border-teal {
+  border: 1px solid rgba(20,184,166,0.35);
+}
+.oc-border-active {
+  border: 1px solid var(--oc-teal);
+  box-shadow: 0 0 12px var(--oc-teal-glow), inset 0 0 12px rgba(20,184,166,0.05);
+}
+
+/* ── Surface cards ────────────────────────────────────────────── */
+.oc-card {
+  background: var(--oc-surface2);
+  border: 1px solid var(--oc-border);
+  border-radius: 12px;
+}
+.oc-card-hover:hover {
+  border-color: rgba(20,184,166,0.3);
+  box-shadow: 0 4px 20px rgba(20,184,166,0.08);
+  transform: translateY(-1px);
+  transition: all 0.2s ease;
+}
+
+/* ── Teal gradient text ───────────────────────────────────────── */
+.oc-gradient-text {
+  background: linear-gradient(135deg, var(--oc-teal), var(--oc-cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Teal gradient button ─────────────────────────────────────── */
+.oc-btn-primary {
+  background: linear-gradient(135deg, var(--oc-teal-dark), var(--oc-teal));
+  color: white;
+  font-weight: 600;
+  border: none;
+  transition: all 0.2s ease;
+}
+.oc-btn-primary:hover {
+  background: linear-gradient(135deg, var(--oc-teal), var(--oc-cyan));
+  box-shadow: 0 4px 20px var(--oc-teal-glow);
+  transform: translateY(-1px);
+}
+
+/* ── Scrollbar ────────────────────────────────────────────────── */
+* { scrollbar-width: thin; scrollbar-color: rgba(20,184,166,0.25) transparent; }
+*::-webkit-scrollbar { width: 4px; height: 4px; }
 *::-webkit-scrollbar-track { background: transparent; }
-*::-webkit-scrollbar-thumb { background: #334155; border-radius: 9999px; }
-*::-webkit-scrollbar-thumb:hover { background: #475569; }
+*::-webkit-scrollbar-thumb { background: rgba(20,184,166,0.3); border-radius: 9999px; }
+*::-webkit-scrollbar-thumb:hover { background: var(--oc-teal); }
 
-/* ── Touch improvements (mobile) ─────────────────────────────── */
+/* ── Focus rings ──────────────────────────────────────────────── */
+:focus-visible { outline: 2px solid var(--oc-teal); outline-offset: 2px; }
+:focus:not(:focus-visible) { outline: none; }
+
+/* ── Touch ────────────────────────────────────────────────────── */
 button, a, [role="button"] { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
 input, textarea, select { -webkit-tap-highlight-color: transparent; }
 
-/* ── Page transitions ─────────────────────────────────────────── */
-@keyframes slide-up {
-  from { opacity: 0; transform: translateY(12px); }
+/* ── Animations ───────────────────────────────────────────────── */
+@keyframes oc-fade-in {
+  from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-@keyframes fade-in {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+@keyframes oc-slide-left {
+  from { transform: translateX(-100%); opacity: 0; }
+  to   { transform: translateX(0);     opacity: 1; }
 }
-@keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(59,130,246,0); }
-  50%       { box-shadow: 0 0 40px 10px rgba(59,130,246,0.25); }
+@keyframes oc-slide-up {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
+}
+@keyframes oc-float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-8px); }
+}
+@keyframes oc-pulse-teal {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(20,184,166,0); }
+  50%       { box-shadow: 0 0 0 8px rgba(20,184,166,0.12); }
+}
+@keyframes oc-shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+@keyframes oc-orbit {
+  from { transform: rotate(0deg)   translateX(18px) rotate(0deg); }
+  to   { transform: rotate(360deg) translateX(18px) rotate(-360deg); }
+}
+@keyframes oc-scan {
+  0%   { transform: translateY(-100%); opacity: 0; }
+  10%  { opacity: 0.4; }
+  90%  { opacity: 0.4; }
+  100% { transform: translateY(400%); opacity: 0; }
+}
+@keyframes oc-gradient-bg {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+@keyframes oc-typing {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+  30%            { transform: translateY(-4px); opacity: 1; }
 }
 
-/* Apply enter animation to all route pages */
-main > * { animation: fade-in 0.18s ease-out; }
+.animate-oc-fade    { animation: oc-fade-in 0.22s ease-out both; }
+.animate-oc-left    { animation: oc-slide-left 0.28s cubic-bezier(0.34,1.56,0.64,1) both; }
+.animate-oc-up      { animation: oc-slide-up 0.32s cubic-bezier(0.34,1.56,0.64,1) both; }
+.animate-oc-float   { animation: oc-float 3.5s ease-in-out infinite; }
+.animate-oc-pulse   { animation: oc-pulse-teal 2.5s ease-in-out infinite; }
+.animate-oc-shimmer {
+  background: linear-gradient(90deg, transparent 0%, rgba(20,184,166,0.15) 50%, transparent 100%);
+  background-size: 200% auto;
+  animation: oc-shimmer 2s linear infinite;
+}
+.animate-oc-typing { animation: oc-typing 1.2s ease-in-out infinite; }
+.animate-oc-typing-2 { animation: oc-typing 1.2s ease-in-out 0.2s infinite; }
+.animate-oc-typing-3 { animation: oc-typing 1.2s ease-in-out 0.4s infinite; }
 
-/* ── Mobile safe area (for notch/home bar) ──────────────────── */
+/* Route page enter */
+main > * { animation: oc-fade-in 0.18s ease-out; }
+
+/* ── Safe areas (mobile notch/home bar) ───────────────────────── */
 .safe-area-bottom { padding-bottom: env(safe-area-inset-bottom, 0px); }
 .pb-safe { padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 0.5rem); }
 
-/* ── Better focus rings ───────────────────────────────────────── */
-:focus-visible { outline: 2px solid #3b82f6; outline-offset: 2px; }
-:focus:not(:focus-visible) { outline: none; }
+/* ── Hide scrollbar (for horizontal scroll) ──────────────────── */
+.hide-scrollbar { scrollbar-width: none; }
+.hide-scrollbar::-webkit-scrollbar { display: none; }
 
-/* ── Ripple on buttons (mobile feel) ─────────────────────────── */
-.active\:scale-\[0\.97\]:active { transform: scale(0.97); transition: transform 0.1s; }
-.active\:scale-\[0\.98\]:active { transform: scale(0.98); transition: transform 0.1s; }
+/* ── Claw mark decorative ─────────────────────────────────────── */
+.oc-claw-mark::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: repeating-linear-gradient(
+    -55deg,
+    transparent 0px,
+    transparent 8px,
+    rgba(20,184,166,0.04) 8px,
+    rgba(20,184,166,0.04) 9px
+  );
+  pointer-events: none;
+  border-radius: inherit;
+}
 
-/* ── Smooth panel bg ─────────────────────────────────────────── */
-.bg-slate-750 { background-color: #1c2433; }
+/* ── Scan line overlay (subtle, for headers) ──────────────────── */
+.oc-scanline::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 50%,
+    rgba(20,184,166,0.025) 50%
+  );
+  background-size: 100% 4px;
+  pointer-events: none;
+}

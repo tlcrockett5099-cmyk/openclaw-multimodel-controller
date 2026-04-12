@@ -148,7 +148,7 @@ export const HistoryPage: React.FC = () => {
   return (
     <div className="flex flex-col h-full overflow-hidden">
       {/* Header */}
-      <div className="px-6 py-4 border-b border-slate-700 bg-slate-900">
+      <div className="px-6 py-4 shrink-0" style={{ borderBottom: '1px solid var(--oc-border)', background: 'var(--oc-surface)' }}>
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-xl font-bold text-white">Conversation History</h1>
@@ -194,23 +194,20 @@ export const HistoryPage: React.FC = () => {
               )}
             </span>
           </div>
-          <div className="h-1.5 bg-slate-700 rounded-full overflow-hidden">
+          <div className="h-1.5 rounded-full overflow-hidden" style={{ background: 'var(--oc-surface2)' }}>
             <div
-              className={`h-full rounded-full transition-all ${
-                usagePercent >= 100
-                  ? 'bg-red-500'
-                  : usagePercent >= 80
-                  ? 'bg-amber-500'
-                  : 'bg-blue-500'
-              }`}
-              style={{ width: `${usagePercent}%` }}
+              className="h-full rounded-full transition-all"
+              style={{
+                width: `${usagePercent}%`,
+                background: usagePercent >= 100 ? '#ef4444' : usagePercent >= 80 ? '#f59e0b' : 'var(--oc-teal)',
+              }}
             />
           </div>
         </div>
       </div>
 
       {/* Toolbar */}
-      <div className="flex items-center gap-3 px-6 py-3 border-b border-slate-700 bg-slate-900/60">
+      <div className="flex items-center gap-3 px-6 py-3 shrink-0" style={{ borderBottom: '1px solid var(--oc-border)', background: 'rgba(7,15,31,0.6)' }}>
         {/* Search */}
         <div className="flex-1 relative">
           <Search size={14} className="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-500" />
@@ -219,7 +216,8 @@ export const HistoryPage: React.FC = () => {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search titles and messages…"
-            className="w-full bg-slate-800 border border-slate-600 rounded-lg pl-8 pr-3 py-1.5 text-white text-sm placeholder-slate-500 focus:outline-none focus:border-blue-500"
+            className="w-full rounded-lg pl-8 pr-3 py-1.5 text-sm placeholder-slate-500 focus:outline-none"
+            style={{ background: 'var(--oc-surface2)', border: '1px solid var(--oc-border)', color: 'var(--oc-text)' }}
           />
         </div>
 
@@ -297,7 +295,7 @@ export const HistoryPage: React.FC = () => {
               className={`border rounded-xl overflow-hidden transition-all ${
                 isSelected
                   ? 'border-blue-500 bg-blue-900/20'
-                  : 'border-slate-700 bg-slate-800'
+                  : 'oc-card'
               }`}
             >
               <div className="flex items-center gap-3 px-4 py-3">
@@ -341,7 +339,7 @@ export const HistoryPage: React.FC = () => {
                 <div className="flex items-center gap-1 shrink-0">
                   <button
                     onClick={() => handleLoad(conv)}
-                    className="px-2.5 py-1 bg-blue-700 hover:bg-blue-600 text-white text-xs rounded-lg transition-colors"
+                    className="px-2.5 py-1 text-white text-xs rounded-lg transition-all oc-btn-primary"
                     title="Open in chat"
                   >
                     Open
@@ -378,7 +376,7 @@ export const HistoryPage: React.FC = () => {
 
               {/* Expanded preview */}
               {isExpanded && (
-                <div className="px-4 pb-4 pt-1 border-t border-slate-700 space-y-2 max-h-64 overflow-y-auto">
+                <div className="px-4 pb-4 pt-1 space-y-2 max-h-64 overflow-y-auto" style={{ borderTop: '1px solid var(--oc-border)' }}>
                   {conv.messages.length === 0 ? (
                     <p className="text-slate-500 text-xs">No messages.</p>
                   ) : (
@@ -406,7 +404,7 @@ export const HistoryPage: React.FC = () => {
       </div>
 
       {/* Pro upgrade footer */}
-      <div className="px-6 py-4 border-t border-slate-700 bg-slate-900">
+      <div className="px-6 py-4 shrink-0" style={{ borderTop: '1px solid var(--oc-border)', background: 'var(--oc-surface)' }}>
         <div className="flex items-center justify-between text-xs text-slate-400">
           <span>
             Free tier: {FREE_CONVERSATION_LIMIT} conversations max. Archiving always frees

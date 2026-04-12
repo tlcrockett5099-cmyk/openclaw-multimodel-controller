@@ -31,7 +31,7 @@ function buildOpenAIPayload(provider: AIProvider, messages: Message[]): ChatComp
       'Content-Type': 'application/json',
       ...(provider.apiKey ? { Authorization: `Bearer ${provider.apiKey}` } : {}),
       ...(provider.type === 'openrouter'
-        ? { 'HTTP-Referer': 'https://github.com/tlcrockett5099-cmyk/openclaw-multimodel-controller', 'X-Title': 'Openclaw MultiModel' }
+        ? { 'HTTP-Referer': 'https://github.com/tlcrockett5099-cmyk/ai-multimodel-controller', 'X-Title': 'AI-Multimodel-Controller' }
         : {}),
     },
     body: {

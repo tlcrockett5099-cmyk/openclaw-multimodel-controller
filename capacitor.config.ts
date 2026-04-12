@@ -1,8 +1,8 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.openclaw.multimodel',
-  appName: 'Openclaw MultiModel',
+  appId: 'com.aimc.controller',
+  appName: 'AI-Multimodel-Controller',
   webDir: 'dist',
   server: {
     androidScheme: 'https',
