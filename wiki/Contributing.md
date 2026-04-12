@@ -1,18 +1,6 @@
 # Contributing to Openclaw
 
-> Thank you for your interest in contributing to Openclaw MultiModel Controller!
-
----
-
-## Getting Started
-
-1. Fork the repository: [github.com/SerThrocken/openclaw-multimodel-controller](https://github.com/SerThrocken/openclaw-multimodel-controller)
-2. Clone your fork: `git clone https://github.com/YOUR_USERNAME/openclaw-multimodel-controller.git`
-3. Install dependencies: `npm install`
-4. Create a branch: `git checkout -b feature/your-feature-name`
-5. Make your changes
-6. Run the build: `npm run build`
-7. Submit a pull request
+> SerThrocken/openclaw-multimodel-controller
 
 ---
 
@@ -20,109 +8,112 @@
 
 ```
 openclaw-multimodel-controller/
-├── src/                        # Main React + TypeScript app
-│   ├── components/             # UI components
-│   │   ├── chat/               # Chat interface
+├── src/                        # Main React + TypeScript + Tailwind app
+│   ├── components/
+│   │   ├── camera/             # Live camera view
+│   │   ├── chat/               # Chat interface & message bubbles
 │   │   ├── connections/        # AI provider management
+│   │   ├── editor/             # Image & video editors
 │   │   ├── history/            # Conversation history
-│   │   ├── layout/             # App layout (sidebar, nav)
-│   │   ├── memory/             # Memory bank
-│   │   ├── onboarding/         # Welcome + OAuth callbacks
-│   │   ├── settings/           # Settings page
-│   │   └── skills/             # Skills library
-│   ├── context/                # React context (Toast, etc.)
+│   │   ├── layout/             # Layout, Sidebar (icon rail), BottomNav (pill)
+│   │   ├── memory/             # Memory Bank page
+│   │   ├── onboarding/         # Welcome screen, OAuth callbacks
+│   │   ├── settings/           # Settings page (all sections)
+│   │   └── skills/             # Skills Library page
+│   ├── context/                # Toast notifications
 │   ├── hooks/                  # Custom React hooks
-│   ├── providers/              # API clients and OAuth helpers
-│   ├── store/                  # Zustand state management
-│   └── types/                  # TypeScript type definitions
+│   ├── providers/              # API clients, OAuth helpers, skills library
+│   ├── store/                  # Zustand global state
+│   └── types/                  # TypeScript interfaces
 ├── server/                     # Python FastAPI backend (optional)
-│   ├── routes/                 # API route handlers
-│   ├── backends/               # AI provider backends
-│   └── ui/                     # Tray icon and web UI
-├── android/                    # Expo/React Native Android app
-├── public/                     # Static assets
-├── wiki/                       # This wiki
-├── store/                      # App Store / Play Store assets
-│   ├── google-play/            # Play Store metadata
-│   └── apple-store/            # App Store metadata
-└── docs/                       # Developer documentation
+├── android/                    # Expo/React Native Android + iOS (EAS)
+├── public/illustrations/       # SVG empty-state illustrations
+├── store/google-play/          # Play Store metadata & submission guide
+├── store/apple-store/          # App Store metadata & submission guide
+└── wiki/                       # This documentation
 ```
+
+---
+
+## Design System
+
+All UI must follow the **Claw OS** design system defined in `src/index.css`:
+
+| CSS Class | Use For |
+|-----------|---------|
+| `oc-bg-grid` | Page backgrounds (dot-grid pattern) |
+| `oc-glass` | Standard glassmorphism panel |
+| `oc-glass-strong` | More opaque glass (modals, sheets) |
+| `oc-card` | Surface cards |
+| `oc-card-hover` | Cards with hover lift effect |
+| `oc-glow-teal` | Teal neon glow shadow |
+| `oc-glow-teal-sm` | Subtle teal glow |
+| `oc-btn-primary` | Teal gradient action button |
+| `oc-gradient-text` | Teal→cyan gradient text |
+| `oc-clip-br` | Corner-cut clip (bottom-right) |
+| `oc-border-teal` | Teal-tinted border |
+| `oc-border-active` | Glowing active border |
+| `animate-oc-fade` | Page/element entrance |
+| `animate-oc-pulse` | Pulsing teal glow |
+
+**CSS variables** (use `style={{ color: 'var(--oc-teal)' }}` etc.):
+- `--oc-bg` `--oc-surface` `--oc-surface2` `--oc-border`
+- `--oc-teal` `--oc-cyan` `--oc-teal-dark` `--oc-teal-glow`
+- `--oc-text` `--oc-muted` `--oc-pro`
 
 ---
 
 ## Coding Standards
 
-- **TypeScript**: All new code must be TypeScript with proper types
-- **Components**: Functional components with React hooks
-- **Styling**: Tailwind CSS utility classes only (no inline styles unless dynamic)
-- **State**: Zustand store for global state, local `useState` for component state
-- **Icons**: Use `lucide-react` for all icons
-- **Colors**: Follow the existing color palette (slate, blue, amber, etc.)
-
----
-
-## Adding a New AI Provider
-
-1. Add the provider type to `src/types/index.ts` → `ProviderType`
-2. Add a template to `src/providers/templates.ts` → `PROVIDER_TEMPLATES`
-3. Add the API call logic to `src/providers/api.ts`
-4. Test with the Test Connection feature
+- **TypeScript** — all new code must be typed; no `any`
+- **Functional components** with React hooks only
+- **Tailwind CSS** for layout/spacing; CSS variables for colors
+- **Zustand** for global state; `useState` for local component state
+- **lucide-react** for all icons
+- **No inline styles for layout** — use Tailwind; inline styles only for dynamic CSS var values
 
 ---
 
 ## Adding a New Skill
 
-1. Open `src/providers/skills-library.ts`
-2. Add your skill to the `BUILTIN_SKILLS` array:
+Edit `src/providers/skills-library.ts`:
+
 ```typescript
 {
-  id: 'unique-skill-id',
-  name: 'Skill Name',
-  description: 'Brief description of what this skill does',
-  category: 'Writing', // must match existing category
+  id: 'unique-kebab-id',
+  name: 'Skill Display Name',
+  description: 'One-sentence description of what this skill does.',
+  category: 'Writing',  // existing category
   systemPrompt: 'You are a specialist in... When the user asks...',
   icon: '🎯',
-  tags: ['relevant', 'tags'],
-  provider: 'all', // or specific provider type
-}
+  tags: ['tag1', 'tag2'],
+  provider: 'all',       // or a specific ProviderType
+  proOnly: true,         // true for Pro, false for free
+},
 ```
+
+Free skills should have `proOnly: false`. Add sparingly — the current free set (10 skills) is intentional.
+
+---
+
+## Adding a New AI Provider
+
+1. Add the type to `src/types/index.ts` → `ProviderType`
+2. Add a template to `src/providers/templates.ts` → `PROVIDER_TEMPLATES`
+3. Add the API fetch logic to `src/providers/api.ts`
+4. Test with the **Test Connection** (⚡) button in the Connections UI
 
 ---
 
 ## Reporting Bugs
 
-1. Check [existing issues](https://github.com/SerThrocken/openclaw-multimodel-controller/issues)
-2. Create a new issue with:
-   - Clear title
-   - Steps to reproduce
-   - Expected vs actual behavior
-   - Screenshots if applicable
-   - Device/OS/browser info
+Open an issue at [github.com/SerThrocken/openclaw-multimodel-controller/issues](https://github.com/SerThrocken/openclaw-multimodel-controller/issues) with:
+- Steps to reproduce
+- Expected vs actual behaviour
+- Browser / OS / platform info
+- Screenshots if applicable
 
-**Pro supporters** get priority bug fix response via Patreon.
-
----
-
-## Feature Requests
-
-1. Open a [Feature Request issue](https://github.com/SerThrocken/openclaw-multimodel-controller/issues/new)
-2. Describe the feature clearly
-3. Explain the use case
-
----
-
-## Code of Conduct
-
-- Be respectful and constructive
-- Welcome contributors of all experience levels
-- Credit others' work appropriately
-- Follow the project's existing patterns
-
----
-
-## License
-
-Openclaw MultiModel Controller is open source. See `LICENSE` in the repository root.
+Pro supporters get priority bug-fix response via Patreon.
 
 ---
 

@@ -1,72 +1,80 @@
 # Openclaw MultiModel Controller — Wiki
 
-> **Created & Maintained by SerThrocken (SerThrocken LLC)**  
+> **Created & Maintained by SerThrocken (SerThrocken LLC)**
 > Repository: [SerThrocken/openclaw-multimodel-controller](https://github.com/SerThrocken/openclaw-multimodel-controller)
 
 ---
 
-Welcome to the official Wiki for **Openclaw MultiModel Controller** — a cross-platform AI chat application supporting multiple AI providers (OpenAI, Claude, Gemini, Perplexity, Ollama, and more) on Android, iOS, and Desktop.
+Welcome to the official wiki for **Openclaw MultiModel Controller** — a cross-platform AI chat application with a completely unique **Claw OS** dark tech interface. Connect to OpenAI, Claude, Gemini, Perplexity, Ollama, OpenRouter, and more — all in one place.
 
 ## 📚 Table of Contents
 
 | Page | Description |
 |------|-------------|
-| [Home](Home) | This page — overview and quick start |
-| [Installation & Setup](Installation) | How to install and run Openclaw |
-| [Features](Features) | Full feature overview |
-| [AI Connections Guide](Connections-Guide) | How to connect AI providers |
-| [Skills Library](Skills-Library) | Using and creating AI Skills & Gems |
+| [Home](Home) | Overview and quick start |
+| [Installation & Setup](Installation) | Install and run Openclaw on any platform |
+| [Features](Features) | Complete feature reference |
+| [AI Connections Guide](Connections-Guide) | Connect AI providers |
+| [Skills Library](Skills-Library) | AI Skills, Gemini Gems, Pro gating |
 | [Memory Bank](Memory-Bank) | Saving and managing memories |
-| [Pro Features & Patreon](Pro-Features) | Unlocking Pro with Patreon |
-| [Building for Android](Building-Android) | Play Store APK & AAB build guide |
-| [Building for iOS](Building-iOS) | App Store IPA build guide |
-| [Desktop (Electron)](Building-Desktop) | PC/Mac/Linux build guide |
-| [Server Setup](Server-Setup) | Python backend server |
+| [Pro Features & Patreon](Pro-Features) | Patreon OAuth, Pro activation |
+| [Building for Android](Building-Android) | Google Play Store build guide |
+| [Building for iOS](Building-iOS) | App Store build guide |
 | [Troubleshooting](Troubleshooting) | Common issues and fixes |
-| [Contributing](Contributing) | How to contribute to Openclaw |
-| [Changelog](Changelog) | Version history |
+| [Contributing](Contributing) | Project structure and contribution guide |
+| [Changelog](Changelog) | Full version history |
 
 ---
 
 ## ⚡ Quick Start
 
 ```bash
-# 1. Clone the repository
 git clone https://github.com/SerThrocken/openclaw-multimodel-controller.git
 cd openclaw-multimodel-controller
-
-# 2. Install dependencies
 npm install
-
-# 3. Start the development server
 npm run dev
 ```
 
-Open [http://localhost:5173](http://localhost:5173) in your browser.
+Open **http://localhost:5173** — the app loads with the Claw OS interface.
 
 ---
 
-## 🌟 What is Openclaw?
+## 🎨 What Makes Openclaw Different
 
-Openclaw is a **unified multi-model AI controller** that lets you:
+Openclaw v1.1.0 ships with a fully custom **Claw OS** visual identity that no other AI app has:
 
-- Chat with multiple AI models from different providers in one app
-- Switch between providers mid-conversation
-- Use specialized **Skills** (system prompts) to configure AI behavior
-- Save important information in a **Memory Bank**
-- Run locally with Ollama, or connect cloud services (OpenAI, Claude, Gemini, etc.)
-- Use on **Android**, **iOS**, **Windows**, **macOS**, or **Linux**
+| Design Feature | Description |
+|----------------|-------------|
+| **Dot-grid background** | Subtle teal radial-gradient dot pattern on deep `#020914` midnight base |
+| **Glassmorphism panels** | Frosted-glass surfaces with `backdrop-filter: blur` and teal-tinted borders |
+| **Neon teal glow** | Active elements glow with `rgba(20,184,166,0.25)` — the SerThrocken brand color |
+| **Icon-rail sidebar** | Desktop shows a 68px icon-only sidebar with hover tooltips — no wasted space |
+| **Floating pill nav** | Mobile bottom nav is a centered frosted-glass pill, not a full-width bar |
+| **Teal chat bubbles** | User messages: teal→cyan gradient. AI messages: glass panel with 3px teal left border |
+| **Typing animation** | Three bouncing teal dots while the AI is thinking |
+| **Claw-mark motifs** | Diagonal stripe patterns and corner-cut clip-paths throughout |
+
+---
+
+## 🌟 Key Features at a Glance
+
+- **7+ AI providers** — OpenAI, Claude, Gemini, Perplexity, Ollama, OpenRouter, Custom
+- **61-skill library** — 10 free, 51 unlocked with Pro
+- **Memory Bank** — Save facts from chat inline, no extra screens
+- **Patreon OAuth** — Auto-verify Pro status via Patreon login
+- **Cross-platform** — Web, Android (Play Store), iOS (App Store), Desktop (Electron)
+- **Privacy-first** — All data stored locally, no account required
 
 ---
 
 ## 🏢 Creator
 
-**SerThrocken** — Developer & Creator of Openclaw MultiModel Controller  
-SerThrocken LLC
+**SerThrocken** — Developer & Creator · SerThrocken LLC
 
 [![Support on Patreon](https://img.shields.io/badge/Patreon-Support-orange)](https://patreon.com/TLG3D)
 [![GitHub](https://img.shields.io/badge/GitHub-SerThrocken-blue)](https://github.com/SerThrocken)
 
 ---
 
-*Openclaw MultiModel Controller © SerThrocken LLC. All rights reserved.*
+*Openclaw MultiModel Controller v1.1.0 © SerThrocken LLC. All rights reserved.*
+

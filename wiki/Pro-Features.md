@@ -1,119 +1,129 @@
 # Pro Features & Patreon
 
-> Unlock Openclaw's full potential with Pro
+> Unlocking Openclaw Pro in v1.1.0
 
 ---
 
 ## What Is Pro?
 
-**Openclaw Pro** is a premium tier that unlocks advanced features for power users. Pro is activated by supporting the project on [Patreon](https://patreon.com/TLG3D) with a $5+/month pledge.
+**Openclaw Pro** unlocks the full feature set with a **$5+/month pledge** on [Patreon](https://patreon.com/TLG3D). Pro is verified automatically via Patreon OAuth (with the backend server) or activated manually via the honor system.
 
 ---
 
-## Pro Feature Comparison
+## Free vs. Pro Comparison
 
 | Feature | Free | Pro |
 |---------|------|-----|
 | AI providers | Unlimited | Unlimited |
 | Saved conversations | 25 | **Unlimited** |
-| Vision / image analysis | 5/day | **Unlimited** |
-| Text-to-Speech | 500 chars/day | **Unlimited** |
+| Vision / image analysis | 5 / day | **Unlimited** |
+| Text-to-Speech | 500 chars / day | **Unlimited** |
+| Skills available | 10 | **61 (all)** |
+| Gemini Gems | ❌ | ✅ All 5 |
+| Custom skills | Unlimited | Unlimited |
+| Memory Bank | Unlimited | Unlimited |
+| Themes | Claw OS dark only | **All 6 themes** |
 | System prompt presets | 1 | **Unlimited** |
-| Themes | Dark only | **All 6 themes** |
-| Full-text chat search | ❌ | ✅ |
-| Usage statistics dashboard | ❌ | ✅ |
+| Full stats dashboard | ❌ | ✅ |
 | Bulk export (zip) | ❌ | ✅ |
-| Conversation tags & folders | ❌ | ✅ |
-| Priority support | ❌ | ✅ |
-| Name in SUPPORTERS.md | ❌ | ✅ (opt-in) |
 | Pro badge in sidebar | ❌ | ✅ |
+| Priority support | ❌ | ✅ |
 
 ---
 
-## How to Activate Pro
+## Activating Pro
 
-### Method 1: Patreon OAuth (Automatic — Requires Python Server)
+### Method 1: Patreon OAuth — Automatic (Recommended)
 
-If you're running the Python backend server:
+This method verifies your patron status automatically via Patreon's API. Requires the Python backend server running.
 
-1. Go to **Settings → Patreon**
-2. Click **Connect with Patreon**
-3. Sign in to your Patreon account in the popup
-4. If you're an active $5+/month patron, Pro is activated automatically
+**Setup (one time):**
+1. Start the backend: `python server/main.py`
+2. Configure `server/config.py` with your Patreon app credentials (see below)
 
-**Requirements**:
-- Python backend running (`python server/main.py`)
-- `patreon_client_id` and `patreon_client_secret` configured in `server/config.py`
+**Activation:**
+1. Open **Settings → Patreon**
+2. Click **❤ Connect with Patreon**
+3. A popup opens — sign in to Patreon
+4. If you have an active $5+/month pledge, Pro is activated automatically
+5. Your name is shown: *"Connected as [Name]"*
 
-### Method 2: Honor System (Manual)
+Re-validation runs automatically every 24 hours.
+
+---
+
+### Method 2: Honor System — Manual
+
+No server required. Trust-based.
 
 1. Pledge $5+/month at [patreon.com/TLG3D](https://patreon.com/TLG3D)
 2. Go to **Settings → 🌟 Pro**
 3. Click **"I've donated — unlock Pro"**
+4. Pro is activated on this device
 
-Pro is activated on your device. This is trust-based.
+---
 
-### Method 3: Creator/Developer Access
+### Method 3: Creator / Developer Access
 
-If you are SerThrocken (the app creator):
+For **SerThrocken** (the app creator) — bypasses the pledge check entirely.
 
-1. Go to **Settings → Patreon**
-2. Click **"I am the creator/developer"**
-3. Authorize in the popup — pledge check is skipped for the app owner
+1. Start the backend server
+2. Go to **Settings → Patreon**
+3. Click **"I am the creator/developer"**
+4. Authorise in the Patreon popup — pledge check is skipped
+5. Pro activates with a *"Creator account linked!"* message
+
+This ensures SerThrocken can always test all features without being locked out.
+
+---
+
+## Setting Up Patreon OAuth
+
+To enable automatic Pro verification, you need a Patreon API app:
+
+1. Go to [patreon.com/portal/registration/register-clients](https://www.patreon.com/portal/registration/register-clients)
+2. Create a new client
+3. Set **Redirect URI** to: `http://localhost:7860/pro/oauth/callback`
+4. Copy the **Client ID** and **Client Secret**
+5. Add to `server/config.py`:
+   ```python
+   patreon_client_id     = "your-client-id"
+   patreon_client_secret = "your-client-secret"
+   patreon_campaign_id   = "your-campaign-id"
+   ```
+6. Restart the server: `python server/main.py`
 
 ---
 
 ## Managing Pro Status
 
-### Check Pro Status
-Settings → 🌟 Pro shows your current status.
+| Action | How |
+|--------|-----|
+| Check status | Settings → 🌟 Pro |
+| Force re-validate | Settings → 🌟 Pro → "Re-validate" |
+| Deactivate Pro | Settings → 🌟 Pro → "Deactivate Pro" |
+| Reconnect Patreon | Settings → Patreon → "Connect with Patreon" |
 
-### Re-validate Pro
-If your Pro status was activated via Patreon OAuth:
-- The app auto-re-validates every 24 hours
-- Force re-validation: Settings → 🌟 Pro → "Re-validate"
+---
 
-### Deactivate Pro
-Settings → 🌟 Pro → "Deactivate Pro"
+## Pro Badge in the Interface
+
+When Pro is active:
+- **Desktop sidebar** — gold `🌟 Pro Active` badge replaces the "Upgrade" button
+- **Mobile sidebar drawer** — same `🌟 Pro Active` badge
+- All locked Skills (🔒) become fully unlocked
+- All themes become available in Settings → Appearance
+- All usage limits are removed silently
 
 ---
 
 ## Why Support on Patreon?
 
-Openclaw is:
-- **Free and open source**
-- Developed and maintained solo by **SerThrocken**
-- Available on Android, iOS, and Desktop
+Openclaw is built and maintained solo by **SerThrocken**. Every pledge directly funds:
+- New features and integrations
+- Bug fixes and security patches
+- App Store & Play Store review fees
+- Backend server infrastructure
+- Community support
 
-Every Patreon pledge directly funds:
-- New features and improvements
-- Bug fixes and maintenance
-- Server costs for Patreon OAuth
-- App Store / Play Store submission costs
-
-**Support the project**: [patreon.com/TLG3D](https://patreon.com/TLG3D)
-
----
-
-## Patreon OAuth Server Configuration
-
-To enable automatic Pro verification via Patreon OAuth, you need a Patreon API app:
-
-1. Go to [patreon.com/portal/registration/register-clients](https://www.patreon.com/portal/registration/register-clients)
-2. Create a new client app
-3. Set Redirect URI to: `http://localhost:7860/pro/oauth/callback`
-4. Copy the **Client ID** and **Client Secret**
-5. Add to `server/config.py`:
-   ```python
-   patreon_client_id = "your-client-id"
-   patreon_client_secret = "your-client-secret"
-   patreon_campaign_id = "your-campaign-id"  # from your Patreon page URL
-   ```
-6. Start the server: `python server/main.py`
-7. Users can now authenticate via Patreon in Settings
-
----
-
-## SUPPORTERS.md
-
-All Pro supporters who opt-in are listed in [SUPPORTERS.md](../SUPPORTERS.md) in the repository. Thank you to everyone who supports this project! 💙
+**Support at**: [patreon.com/TLG3D](https://patreon.com/TLG3D)

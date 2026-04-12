@@ -1,89 +1,97 @@
 # Memory Bank
 
-> Saving and managing memories in Openclaw MultiModel Controller
+> Inline memory saving and management in Openclaw v1.1.0
 
 ---
 
 ## What Is the Memory Bank?
 
-The **Memory Bank** is your personal knowledge store within Openclaw. Save important facts, preferences, or information from your conversations so the AI has context about you across all future chats.
+The **Memory Bank** is a personal knowledge store that travels with you across all conversations. Save facts, preferences, project context, or anything else — the AI automatically receives your memories as context at the start of every conversation.
 
-Think of it like Google's "personal results" or ChatGPT's memory feature — but fully local and under your control.
+It works like Google's personalised results or ChatGPT's memory feature, but everything is stored **100% locally** on your device.
 
 ---
 
-## How to Save a Memory
+## Saving a Memory
 
-### Method 1: From a Chat Message (Recommended)
+### Method 1: Directly from Chat (Recommended)
 
-1. During a conversation, hover over any AI response
-2. Click the **💾 Save as Memory** button (appears in the message actions)
-3. A small dialog pops up — add a label (optional)
-4. Click **Save Memory**
+1. Hover over any **AI response** in the chat
+2. The action buttons appear — click the **🧠 brain icon** (Save as Memory)
+3. A small dialog appears — optionally add a label
+4. Click **Save** — memory is saved without leaving the chat
 
-The memory is saved instantly without leaving the chat.
+This is the key difference from other apps: you never have to navigate away to capture something useful.
 
 ### Method 2: From the Memory Bank Page
 
-1. Open **Settings → Memory Bank** or navigate to the **Memory** section
+1. Navigate to **Memory Bank** (brain icon in sidebar, or Settings → Memory Bank)
 2. Click **+ Add Memory**
 3. Enter a label and the memory content
 4. Click **Save**
 
 ---
 
-## Managing Memories
+## The Memory Bank Page
 
-From the **Memory Bank** page (Settings → Memory Bank or `/memory`):
+Access via the **Memory** item in the sidebar (desktop) or via Settings → Memory Bank.
 
-| Action | How |
-|--------|-----|
-| View all memories | Browse the memory cards list |
-| Delete a memory | Click the 🗑️ trash icon on any card |
-| Edit a memory | Click the ✏️ edit icon |
-| Clear all memories | "Clear All" button (with confirmation) |
-| Add a new memory | "+ Add Memory" button |
+The page shows all your saved memories as cards, each displaying:
+- **Label** (if set)
+- **Content preview**
+- **Date saved**
+- **Source** (conversation ID if saved from chat)
+- **Delete** (🗑️) button
+
+Other actions:
+- **Clear All** — deletes every memory (with confirmation prompt)
 
 ---
 
 ## How Memories Work in Conversations
 
-Memories are automatically injected into the system context when you start or continue a conversation. The AI "knows" your saved memories and can reference them.
+When you send a message, Openclaw prepends your saved memories to the conversation context. The AI "knows" everything in your Memory Bank.
 
-**Example**:
-- Memory: "I prefer Python over JavaScript for backend code"
-- When you ask "What language should I use for this API?", the AI will suggest Python
+**Example workflow:**
+1. Save memory: *"I'm building a React + FastAPI app for pet owners"*
+2. Next day, open a new chat and ask: *"What should my API endpoints look like?"*
+3. The AI already knows your tech stack and domain — no re-explaining needed
 
 ---
 
 ## Memory Best Practices
 
-### Good memories to save:
-- Personal preferences ("I prefer concise answers")
-- Your tech stack ("I use React + FastAPI + PostgreSQL")
-- Project context ("I'm building a mobile app for pet owners")
-- Communication style ("Explain things like I'm a beginner")
-- Recurring facts ("My timezone is EST")
+**Save these kinds of things:**
+- Personal preferences: *"I prefer concise, direct answers"*
+- Tech stack: *"I use TypeScript, React, Tailwind CSS, and Supabase"*
+- Project context: *"Current project: mobile app for pet adoption"*
+- Communication style: *"Explain as if I'm a junior developer"*
+- Recurring facts: *"My timezone is EST, working hours 9am–6pm"*
 
-### Tips:
-- Keep memories **concise** — short, factual statements work best
-- Use **labels** to organize them (e.g., "Coding Preference", "Project Context")
-- Delete outdated memories — old context can confuse the AI
-- Review memories periodically to keep them relevant
+**Tips:**
+- Keep each memory **short and factual** — one clear statement per memory
+- Use **labels** to organise (e.g., "Work Prefs", "Project Alpha", "Coding Style")
+- **Delete stale memories** — outdated context can confuse the AI
+- Review your Memory Bank periodically to keep it relevant
 
 ---
 
 ## Privacy
 
-All memories are stored **locally** in your device's localStorage. They are never sent to any server. Memories are only shared with the AI provider you're actively chatting with, as part of the conversation context.
+All memories are stored in **browser localStorage / device storage** only. They are:
+- Never sent to any Openclaw server
+- Only shared with the AI provider you're actively chatting with, as inline context
+- Exportable at any time (export the conversation that contains them)
+- Fully deletable at any time
 
 ---
 
-## Memory Limits
+## Storage & Limits
 
-| Tier | Memory Limit |
-|------|-------------|
-| Free | Unlimited (local storage) |
-| Pro | Unlimited |
-
-There's no hard limit on memories, but performance may decrease with very large numbers. Recommend keeping under 100 memories for optimal performance.
+| Aspect | Detail |
+|--------|--------|
+| Storage location | Device localStorage |
+| Free limit | Unlimited (localStorage bound) |
+| Pro limit | Unlimited |
+| Recommended max | ~100 memories for best performance |
+| Persistence | Survives app restarts; cleared only if you clear site data |

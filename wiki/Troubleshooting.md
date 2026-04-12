@@ -1,14 +1,13 @@
 # Troubleshooting
 
-> Common issues and solutions for Openclaw MultiModel Controller
+> Common issues and solutions for Openclaw MultiModel Controller v1.1.0
 
 ---
 
-## Installation Issues
+## Installation
 
 ### `npm install` fails
 ```bash
-# Clear cache and retry
 npm cache clean --force
 rm -rf node_modules package-lock.json
 npm install
@@ -16,96 +15,134 @@ npm install
 
 ### Port 5173 already in use
 ```bash
-# Use a different port
 npm run dev -- --port 5174
 ```
 
 ---
 
+## Visual / UI Issues
+
+### The background looks plain dark grey instead of the Claw OS dot-grid
+- Hard-refresh the page: **Ctrl+Shift+R** (Windows/Linux) or **Cmd+Shift+R** (macOS)
+- Clear browser cache and reload
+- Ensure the build is fresh: `npm run build && npm run preview`
+
+### Glassmorphism blur not showing
+- `backdrop-filter: blur()` is not supported in Firefox by default  
+- Enable it in Firefox: `about:config` → set `layout.css.backdrop-filter.enabled = true`
+- Chrome, Edge, Safari, and mobile browsers all support it natively
+
+### Floating pill bottom nav not visible on mobile
+- Scroll up — the pill is fixed above the safe-area inset at the bottom of the screen
+- If the page content covers it, check that `main` has `pb-20 md:pb-0` in Layout.tsx
+
+### Desktop sidebar shows full drawer instead of icon rail
+- Resize your browser — the icon rail only appears at the `md` breakpoint (768px+)
+- Check that `Sidebar.tsx` is the current version (icon rail with 68px width)
+
+---
+
 ## AI Provider Issues
 
-### "401 Unauthorized" Error
-- **Cause**: Invalid or expired API key
-- **Fix**: Go to Connections → Edit provider → Re-enter API key
+### "401 Unauthorized"
+- Check your API key is correct and hasn't expired
+- Connections → Edit provider → re-enter the API key
 
-### "429 Too Many Requests" Error
-- **Cause**: You've hit the provider's rate limit
-- **Fix**: Wait 1-2 minutes and try again, or upgrade your plan with the provider
+### "429 Too Many Requests"
+- You've hit the provider's rate limit — wait 1–2 minutes
+- Consider upgrading your plan with the AI provider
 
 ### "Network Error" / "Failed to fetch"
-- **Cause**: CORS issue, blocked network, or server down
-- **Fix**: 
-  1. Check your internet connection
-  2. Verify the API key is correct
-  3. Try with a different provider
-  4. Start the Python backend server for proxy support
+- Check internet connection
+- Try with a different provider
+- Start the Python backend: `python server/main.py` — it proxies requests and resolves CORS issues
 
 ### Ollama "Connection Refused"
-- **Cause**: Ollama is not running
-- **Fix**: Start Ollama: `ollama serve` (or launch the Ollama desktop app)
-- **Check**: Visit `http://localhost:11434` in browser — should show `{"version":"x.x.x"}`
+- Start Ollama: `ollama serve` (or open the Ollama desktop app)
+- Verify it's running: open `http://localhost:11434` — should show `{"version":"x.x.x"}`
+- Pull a model first: `ollama pull llama3.2`
 
-### Gemini Google OAuth not working
-- **Fix**: 
-  1. Ensure you've set the Google OAuth Client ID in Settings → Integrations
-  2. Allow popups for the Openclaw URL in your browser
-  3. Check that `http://localhost:5173/oauth-callback` is in your Google Cloud Console authorized redirect URIs
+### Google Gemini OAuth not working
+- Set your Google OAuth Client ID in Settings → Integrations → Google Sign-In
+- Add `http://localhost:5173/oauth-callback` to your Google Cloud Console authorized redirect URIs
+- Allow popups for the app URL in your browser
 
 ---
 
 ## Chat Issues
 
 ### Messages not sending
-- Check that a provider is enabled (blue dot in connections)
-- Ensure an active conversation is selected or a new one will be created
-- Check the provider's API key is valid
+- Check that at least one provider is enabled (teal dot shows in the sidebar)
+- Verify the provider's API key is valid with the **Test** button (⚡) in Connections
+- Check the provider isn't rate-limited
 
-### AI responses cut off
-- The model hit its max token limit — go to Connections → Edit → increase Max Tokens
-- Some free tier accounts have token limits
+### AI responses are cut off
+- The model hit its max token limit — go to Connections → Edit → increase **Max Tokens**
+- Free-tier API plans often have lower token limits
 
-### TTS (Text-to-Speech) not working
-- **Browser**: Ensure the browser has permission to play audio
-- **Daily limit**: Free tier is limited to 500 chars/day — upgrade to Pro for unlimited
-- Check system volume is not muted
+### TTS (Text-to-Speech) not playing
+- Check system/browser audio is not muted
+- Free limit: 500 chars/day — a warning banner appears when you approach the limit
+- Upgrade to Pro for unlimited TTS
 
-### Image attachment not showing
-- Vision/image analysis requires a multimodal model (GPT-4o, Claude 3, Gemini)
-- Free tier limited to 5 images/day — upgrade to Pro
+### Camera capture not working on mobile
+- Grant camera permission to the app/browser
+- iOS Safari: Settings → Safari → Camera → Allow
 
----
-
-## Mobile Issues
-
-### Bottom navigation overlaps content on iOS
-- This is handled by safe area insets — ensure you're running the latest version
-- If using the web app in Safari, add to home screen for best experience
-
-### Keyboard pushes content off screen
-- This is a known issue with some Android WebViews
-- For best mobile experience, install via the Android APK
-
-### App not loading after update
-- Clear app cache: Settings (phone) → Apps → Openclaw → Clear Cache
-- Or hard-refresh the browser: Ctrl+Shift+R (desktop) / pull-down to refresh
+### "Save as Memory" button not visible on AI messages
+- Hover over the message (desktop) or the button is in the action row below the bubble
+- The action row shows on hover (desktop) or tap (mobile)
 
 ---
 
-## Desktop (Electron) Issues
+## Skills Issues
 
-### Electron app won't start
-```bash
-# Kill any hanging processes and retry
-npm run electron:dev
-```
+### Skill shows 🔒 "Pro Only"
+- Activate Pro in **Settings → 🌟 Pro** or via **Settings → Patreon → Connect with Patreon**
+- Only 10 skills are available without Pro — see [Skills Library](Skills-Library)
 
-### "Application cannot be opened" on macOS
-- Go to System Preferences → Security & Privacy → Allow apps from: App Store and identified developers
-- Or right-click the app → Open → Open anyway
+### Active skills banner not showing in chat
+- Go to Skills page and confirm at least one skill is activated (shows "✓ Active")
+- The banner only appears when 1+ skills are active
 
-### White screen on launch (Windows)
-- Try running as administrator
-- Clear Electron cache: `%APPDATA%\openclaw\Cache`
+### Custom skill not saving
+- Both **Name** and **System Prompt** fields are required
+- The form won't submit if either is empty
+
+---
+
+## Memory Bank Issues
+
+### Memories not persisting after refresh
+- Openclaw stores memories in browser localStorage — this data is cleared if you clear site data
+- Private/incognito browsing does not persist localStorage across sessions
+- Use a regular browser session for persistent memories
+
+### Memory Bank page is empty
+- If you haven't saved any memories yet, you'll see the empty state illustration
+- Save memories from chat using the 🧠 button on any AI message
+
+---
+
+## Pro / Patreon Issues
+
+### Patreon OAuth popup is blocked
+- Allow popups for the app URL in your browser settings
+- Chrome: click the popup-blocked icon (⊕) in the address bar → Allow
+
+### Pro not activating after connecting Patreon
+- Ensure your pledge is **$5+/month** and the payment has processed (allow 5–10 min)
+- The server checks for `is_active_patron` — pending or failed payments won't qualify
+- Use the honor-system toggle if OAuth fails: Settings → 🌟 Pro → "I've donated"
+
+### Backend server required for Patreon OAuth but not running
+- Start it: `python server/main.py` from the `server/` directory
+- If server won't start, install dependencies: `pip install -r requirements.txt`
+- Without the server, use the manual honor-system toggle instead
+
+### Pro status lost after reinstall / clearing data
+- Re-activate via Settings → 🌟 Pro → "I've donated"
+- Or re-connect Patreon OAuth with the server running
 
 ---
 
@@ -113,20 +150,19 @@ npm run electron:dev
 
 ### TypeScript errors
 ```bash
-# Check for type errors
-npx tsc --noEmit
+npx tsc --noEmit  # show all type errors without building
 ```
 
 ### Vite build fails
 ```bash
-# Clean dist and rebuild
 rm -rf dist
 npm run build
 ```
 
-### Android build fails
-- Ensure Java JDK 17 is installed and `JAVA_HOME` is set
-- In Android Studio: File → Invalidate Caches / Restart
+### Android EAS Build fails
+- Ensure you're logged in: `eas login`
+- Check `android/app.json` for correct `bundleIdentifier` / `package`
+- Run `eas build:configure` from the `android/` directory
 
 ### iOS build fails (CocoaPods)
 ```bash
@@ -137,43 +173,8 @@ pod install
 
 ---
 
-## Data & Storage Issues
-
-### Conversations not saving
-- Check browser localStorage is not blocked (private/incognito mode)
-- Ensure you're not exceeding the 25-conversation free tier limit
-- Try exporting and re-importing conversations
-
-### Settings reset after update
-- This can happen after major version updates that change the storage schema
-- Re-configure your providers in Connections
-- Your API keys are not stored after a schema reset for security
-
-### "Storage full" warning
-- Archive old conversations: History → Select All → Archive
-- This exports to JSON and removes from app storage
-
----
-
-## Pro / Patreon Issues
-
-### Pro not activating after Patreon payment
-- Allow 5-10 minutes for Patreon to process the payment
-- Try the manual "I've donated — unlock Pro" button in Settings → 🌟 Pro
-- Contact SerThrocken on Patreon if the issue persists
-
-### Patreon OAuth popup blocked
-- Allow popups for the app URL in your browser settings
-- Chrome: Click the popup blocked icon in the address bar → Allow
-
-### Lost Pro status after reinstall
-- Pro status is stored locally — re-activate via Settings → 🌟 Pro → "I've donated"
-- Or re-connect Patreon OAuth if the Python server is running
-
----
-
-## Getting More Help
+## Getting Help
 
 1. **GitHub Issues**: [github.com/SerThrocken/openclaw-multimodel-controller/issues](https://github.com/SerThrocken/openclaw-multimodel-controller/issues)
-2. **Patreon**: Pro supporters get priority support at [patreon.com/TLG3D](https://patreon.com/TLG3D)
-3. **Wiki**: Check other Wiki pages for detailed guides
+2. **Patreon (Pro supporters get priority response)**: [patreon.com/TLG3D](https://patreon.com/TLG3D)
+3. **Wiki**: Check other pages for detailed guides
