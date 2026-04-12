@@ -479,6 +479,62 @@ export const SettingsPage: React.FC = () => {
           </div>
         </section>
 
+        {/* Credits */}
+        <section>
+          <h2 className="text-sm font-semibold text-slate-300 uppercase tracking-wide mb-4">Credits &amp; Creator</h2>
+          <div className="bg-slate-800 border border-slate-700 rounded-xl overflow-hidden">
+            {/* LLC Logo Banner */}
+            <div className="relative w-full h-36 bg-gradient-to-br from-green-900/40 to-emerald-900/40 flex items-center justify-center overflow-hidden">
+              <img
+                src="https://github.com/user-attachments/assets/6947d2ec-824a-41e9-84aa-ac66086c7b28"
+                alt="SerThrocken LLC Logo"
+                className="h-full w-full object-contain"
+                onError={(e) => {
+                  (e.target as HTMLImageElement).style.display = 'none';
+                  const fallback = document.getElementById('llc-logo-fallback');
+                  if (fallback) fallback.style.display = 'flex';
+                }}
+              />
+              <div
+                id="llc-logo-fallback"
+                className="absolute inset-0 items-center justify-center hidden"
+              >
+                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center shadow-lg">
+                  <span className="text-white text-2xl font-bold">S</span>
+                </div>
+              </div>
+            </div>
+            <div className="p-4 space-y-2">
+              <div className="flex items-center gap-2">
+                <span className="text-emerald-400 text-base font-bold">SerThrocken LLC</span>
+                <span className="text-slate-500 text-xs">· Official LLC Logo</span>
+              </div>
+              <p className="text-slate-400 text-xs leading-relaxed">
+                Openclaw MultiModel Controller is designed and maintained by <strong className="text-white">SerThrocken</strong>.
+                All rights reserved. The spiral logo above is the official LLC logo of SerThrocken.
+              </p>
+              <div className="flex flex-wrap gap-2 pt-1">
+                <a
+                  href="https://github.com/SerThrocken/openclaw-multimodel-controller"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-400 hover:text-blue-300 text-xs transition-colors"
+                >
+                  GitHub →
+                </a>
+                <a
+                  href={PATREON_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-amber-400 hover:text-amber-300 text-xs transition-colors"
+                >
+                  Patreon →
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* About */}
         <section>
           <h2 className="text-sm font-semibold text-slate-300 uppercase tracking-wide mb-4">About</h2>
@@ -486,20 +542,28 @@ export const SettingsPage: React.FC = () => {
             <Info size={20} className="text-blue-400 shrink-0 mt-0.5" />
             <div>
               <p className="text-white font-medium text-sm">Openclaw MultiModel Controller</p>
-              <p className="text-slate-400 text-xs mt-1">Version 1.0.0</p>
+              <p className="text-slate-400 text-xs mt-1">Version 1.0.0 · by SerThrocken</p>
               <p className="text-slate-400 text-xs mt-2">
                 A cross-platform AI chat controller supporting multiple AI providers including
                 OpenAI, Claude, Gemini, Perplexity, Ollama, and more.
-                Available as Android APK and Desktop (PC/Mac/Linux) application.
+                Available as Android (Play Store), iOS (App Store), and Desktop (PC/Mac/Linux).
               </p>
-              <div className="flex gap-3 mt-3">
+              <div className="flex flex-wrap gap-3 mt-3">
                 <a
-                  href="https://github.com/tlcrockett5099-cmyk/openclaw-multimodel-controller"
+                  href="https://github.com/SerThrocken/openclaw-multimodel-controller"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-blue-400 hover:text-blue-300 text-xs transition-colors"
                 >
                   GitHub Repository →
+                </a>
+                <a
+                  href="https://github.com/SerThrocken/openclaw-multimodel-controller/wiki"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-400 hover:text-blue-300 text-xs transition-colors"
+                >
+                  Wiki / Docs →
                 </a>
               </div>
             </div>

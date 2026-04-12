@@ -1,0 +1,76 @@
+🤖 Openclaw MultiModel Controller — The Ultimate AI Chat Hub
+
+Chat with ALL your favorite AI models from one beautiful app. Switch between OpenAI GPT-4o, Claude, Google Gemini, Perplexity, Ollama (local/offline), OpenRouter, and any custom OpenAI-compatible API — all in one place.
+
+━━━━━━━━━━━━━━━━━━━━━━━━
+🌟 KEY FEATURES
+━━━━━━━━━━━━━━━━━━━━━━━━
+
+💬 MULTI-MODEL CHAT
+• Connect to 7+ AI providers with a single app
+• Switch AI models mid-conversation
+• Color-coded providers for easy identification
+• Full conversation history with search and export
+
+🛠️ SKILLS LIBRARY (55+ SKILLS)
+• Activate specialist AI personas: Code Reviewer, Creative Writer, Research Assistant, Tutor, Financial Advisor, and more
+• Google Gemini Gems: Research, Code, Writing, Learning, Creative
+• Create your own custom skills
+• Skills are automatically injected into conversations
+
+🧠 MEMORY BANK
+• Save important information from conversations as memories
+• Memories are automatically used as context in future chats
+• Save directly from any AI message — no extra screens needed
+
+🔌 SUPPORTED AI PROVIDERS
+• OpenAI — GPT-4o, GPT-4o Mini, o1, o3-mini
+• Anthropic Claude — Claude 3.5, Claude Opus 4.5, Claude Haiku
+• Google Gemini — Gemini 2.5 Pro, Gemini 2.0 Flash
+• Perplexity — Real-time web search AI
+• Ollama — Run AI 100% offline on your device
+• OpenRouter — 200+ models in one place
+• Custom — Any OpenAI-compatible API
+
+📸 VISION & MEDIA
+• Attach photos from your library or camera
+• Live camera capture for real-time AI analysis
+• Video frame extraction
+
+🔊 TEXT-TO-SPEECH
+• Listen to AI responses with natural-sounding voice
+• Tap any message to have it read aloud
+
+🎨 BEAUTIFUL UI
+• 6 themes: Dark, Light, OLED Black, Solarized, Forest, Ocean
+• Adjustable font size and message density
+• Smooth animations throughout
+
+━━━━━━━━━━━━━━━━━━━━━━━━
+🌟 PRO FEATURES
+━━━━━━━━━━━━━━━━━━━━━━━━
+
+Unlock unlimited features with a $5+/month Patreon pledge:
+
+✦ Unlimited saved conversations
+✦ Unlimited image analysis
+✦ Unlimited Text-to-Speech
+✦ All premium themes
+✦ Unlimited system prompt presets
+✦ Full usage statistics
+✦ Priority support
+
+Support at: patreon.com/TLG3D
+
+━━━━━━━━━━━━━━━━━━━━━━━━
+🔒 PRIVACY FIRST
+━━━━━━━━━━━━━━━━━━━━━━━━
+
+• All data stored locally on your iPhone/iPad
+• API keys never leave your device
+• No account required to use
+• Your conversations are yours — export anytime
+• Open source: github.com/SerThrocken/openclaw-multimodel-controller
+
+Created by SerThrocken (SerThrocken LLC)
+Open source · Community-driven · Privacy-first

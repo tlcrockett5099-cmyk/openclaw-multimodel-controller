@@ -1,30 +1,76 @@
 {
   "expo": {
-    "name": "OpenClaw",
-    "slug": "openclaw-android",
-    "version": "1.0.0",
+    "name": "Openclaw MultiModel Controller",
+    "slug": "openclaw-multimodel",
+    "version": "1.1.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "dark",
+    "scheme": "openclaw",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#1a1a2e"
+      "backgroundColor": "#0f172a"
+    },
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.openclaw.controller",
+      "buildNumber": "1",
+      "infoPlist": {
+        "NSCameraUsageDescription": "Openclaw uses the camera for live AI visual analysis.",
+        "NSMicrophoneUsageDescription": "Openclaw uses the microphone for voice input to AI.",
+        "NSPhotoLibraryUsageDescription": "Openclaw accesses your photo library to attach images to AI conversations.",
+        "ITSAppUsesNonExemptEncryption": false
+      },
+      "config": {
+        "usesNonExemptEncryption": false
+      },
+      "icon": "./assets/icon.png",
+      "splash": {
+        "image": "./assets/splash.png",
+        "resizeMode": "contain",
+        "backgroundColor": "#0f172a"
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#1a1a2e"
+        "backgroundColor": "#0f172a"
       },
       "package": "com.openclaw.controller",
+      "versionCode": 1,
       "permissions": [
         "INTERNET",
         "ACCESS_NETWORK_STATE",
-        "ACCESS_WIFI_STATE"
+        "ACCESS_WIFI_STATE",
+        "CAMERA",
+        "RECORD_AUDIO",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE"
+      ],
+      "intentFilters": [
+        {
+          "action": "VIEW",
+          "autoVerify": true,
+          "data": [
+            {
+              "scheme": "openclaw"
+            }
+          ],
+          "category": ["BROWSABLE", "DEFAULT"]
+        }
       ]
     },
-    "plugins": [
-      "expo-router"
-    ]
+    "web": {
+      "bundler": "metro"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "openclaw-multimodel-controller"
+      }
+    },
+    "owner": "serthrocken",
+    "plugins": ["expo-router"]
   }
 }
