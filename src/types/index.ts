@@ -115,6 +115,7 @@ export interface Skill {
   icon: string;
   tags: string[];
   provider: 'all' | ProviderType;
+  proOnly?: boolean;
   isCustom?: boolean;
   createdAt?: string;
 }
