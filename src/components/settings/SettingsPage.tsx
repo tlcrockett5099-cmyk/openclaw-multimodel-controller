@@ -87,7 +87,7 @@ export const SettingsPage: React.FC = () => {
 
   return (
     <div className="flex flex-col h-full overflow-hidden">
-      <div className="px-6 py-4 border-b border-slate-700 bg-slate-900">
+      <div className="px-6 py-4 shrink-0" style={{ borderBottom: '1px solid var(--oc-border)', background: 'var(--oc-surface)' }}>
         <h1 className="text-xl font-bold text-white">Settings</h1>
         <p className="text-slate-400 text-sm mt-0.5">Customize your Openclaw experience</p>
       </div>
@@ -117,13 +117,13 @@ export const SettingsPage: React.FC = () => {
                         settings.theme === theme.id
                           ? 'bg-blue-600 border-blue-600 text-white'
                           : locked
-                          ? 'bg-slate-800 border-slate-700 text-slate-500 cursor-not-allowed'
-                          : 'bg-slate-800 border-slate-600 text-slate-400 hover:border-slate-500 hover:text-white'
+                          ? 'rounded-lg border text-slate-500 cursor-not-allowed'
+                          : 'rounded-lg border text-slate-400 hover:text-white'
                       }`}
                     >
                       <span
-                        className="w-3 h-3 rounded-full border border-slate-600 shrink-0"
-                        style={{ backgroundColor: theme.dot }}
+                        className="w-3 h-3 rounded-full border shrink-0"
+                        style={{ borderColor: "var(--oc-border)", backgroundColor: theme.dot }}
                       />
                       {locked ? <Lock size={12} className="mr-0.5" /> : null}
                       {theme.label}
@@ -153,7 +153,7 @@ export const SettingsPage: React.FC = () => {
                     className={`px-4 py-2 rounded-lg text-sm border transition-colors capitalize ${
                       settings.density === d
                         ? 'bg-blue-600 border-blue-600 text-white'
-                        : 'bg-slate-800 border-slate-600 text-slate-400 hover:border-slate-500 hover:text-white'
+                        : 'rounded-lg border text-slate-400 hover:text-white'
                     }`}
                   >
                     {d}
@@ -173,7 +173,7 @@ export const SettingsPage: React.FC = () => {
                     className={`px-4 py-2 rounded-lg text-sm border transition-colors ${
                       settings.fontSize === size
                         ? 'bg-blue-600 border-blue-600 text-white'
-                        : 'bg-slate-800 border-slate-600 text-slate-400 hover:border-slate-500 hover:text-white'
+                        : 'rounded-lg border text-slate-400 hover:text-white'
                     }`}
                   >
                     {size === 'sm' ? 'Small' : size === 'md' ? 'Medium' : 'Large'}
@@ -213,7 +213,7 @@ export const SettingsPage: React.FC = () => {
             {systemPromptPresets.map((preset) => (
               <div
                 key={preset.id}
-                className="flex items-start gap-3 bg-slate-800 border border-slate-700 rounded-xl px-4 py-3"
+                className="flex items-start gap-3 oc-card px-4 py-3"
               >
                 <div className="flex-1 min-w-0">
                   <div className="text-sm text-white font-medium">{preset.name}</div>
@@ -231,20 +231,20 @@ export const SettingsPage: React.FC = () => {
 
             {canAddPreset ? (
               showAddPreset ? (
-                <div className="bg-slate-800 border border-slate-700 rounded-xl p-4 space-y-3">
+                <div className="oc-card p-4 space-y-3">
                   <input
                     type="text"
                     value={presetName}
                     onChange={(e) => setPresetName(e.target.value)}
                     placeholder="Preset name"
-                    className="w-full bg-slate-700 border border-slate-600 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-blue-500"
+                    className="w-full rounded-lg px-3 py-2 text-sm focus:outline-none" style={{ background: "var(--oc-surface2)", border: "1px solid var(--oc-border)", color: "var(--oc-text)" }}
                   />
                   <textarea
                     value={presetPrompt}
                     onChange={(e) => setPresetPrompt(e.target.value)}
                     placeholder="System prompt text…"
                     rows={3}
-                    className="w-full bg-slate-700 border border-slate-600 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-blue-500 resize-none"
+                    className="w-full rounded-lg px-3 py-2 text-sm focus:outline-none resize-none" style={{ background: "var(--oc-surface2)", border: "1px solid var(--oc-border)", color: "var(--oc-text)" }}
                   />
                   <div className="flex gap-2">
                     <button
@@ -256,7 +256,7 @@ export const SettingsPage: React.FC = () => {
                     </button>
                     <button
                       onClick={() => { setShowAddPreset(false); setPresetName(''); setPresetPrompt(''); }}
-                      className="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-slate-300 text-sm rounded-lg transition-colors"
+                      className="px-4 py-2 text-sm rounded-lg transition-colors" style={{ background: "var(--oc-surface2)", border: "1px solid var(--oc-border)", color: "var(--oc-muted)" }}
                     >
                       Cancel
                     </button>
@@ -265,7 +265,7 @@ export const SettingsPage: React.FC = () => {
               ) : (
                 <button
                   onClick={() => setShowAddPreset(true)}
-                  className="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 border border-slate-600 border-dashed text-slate-400 hover:text-white text-sm rounded-xl transition-colors"
+                  className="flex items-center gap-2 px-4 py-2 text-sm rounded-xl transition-colors" style={{ background: "var(--oc-surface2)", border: "1px dashed var(--oc-border)", color: "var(--oc-muted)" }}
                 >
                   <Plus size={14} /> Add Preset
                 </button>
@@ -293,7 +293,7 @@ export const SettingsPage: React.FC = () => {
               <p className="text-slate-400 text-xs">Verified via Patreon donation</p>
               <button
                 onClick={() => updateSettings({ isPro: false })}
-                className="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-slate-300 text-sm rounded-lg transition-colors"
+                className="px-4 py-2 text-sm rounded-lg transition-colors" style={{ background: "var(--oc-surface2)", border: "1px solid var(--oc-border)", color: "var(--oc-muted)" }}
               >
                 Deactivate Pro
               </button>
@@ -339,7 +339,7 @@ export const SettingsPage: React.FC = () => {
         <section>
           <h2 className="text-sm font-semibold text-slate-300 uppercase tracking-wide mb-4">Integrations</h2>
           <div className="space-y-3">
-            <div className="bg-slate-800 border border-slate-700 rounded-xl p-4 space-y-3">
+            <div className="oc-card p-4 space-y-3">
               <div className="flex items-start gap-3">
                 <span className="text-2xl">✨</span>
                 <div className="flex-1">
@@ -356,7 +356,7 @@ export const SettingsPage: React.FC = () => {
                 value={settings.googleClientId || ''}
                 onChange={e => updateSettings({ googleClientId: e.target.value })}
                 placeholder="xxxx.apps.googleusercontent.com"
-                className="w-full bg-slate-700 border border-slate-600 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-blue-500 font-mono"
+                className="w-full rounded-lg px-3 py-2 text-sm focus:outline-none font-mono" style={{ background: "var(--oc-surface2)", border: "1px solid var(--oc-border)", color: "var(--oc-text)" }}
               />
             </div>
           </div>
@@ -373,14 +373,14 @@ export const SettingsPage: React.FC = () => {
                 { label: 'Chats', value: stats.conversations },
                 { label: 'Messages', value: stats.messages },
               ].map((stat) => (
-                <div key={stat.label} className="bg-slate-800 rounded-xl p-4 text-center border border-slate-700">
+                <div key={stat.label} className="oc-card rounded-xl p-4 text-center">
                   <div className="text-2xl font-bold text-white">{stat.value}</div>
                   <div className="text-slate-400 text-xs mt-0.5">{stat.label}</div>
                 </div>
               ))}
             </div>
           ) : (
-            <div className="bg-slate-800 border border-slate-700 rounded-xl p-4 text-center">
+            <div className="oc-card p-4 text-center">
               <p className="text-slate-400 text-sm">
                 🔒 Full statistics available with{' '}
                 <a href={PATREON_URL} target="_blank" rel="noopener noreferrer" className="text-amber-400 hover:underline">
@@ -395,7 +395,7 @@ export const SettingsPage: React.FC = () => {
         {/* Patreon OAuth */}
         <section>
           <h2 className="text-sm font-semibold text-slate-300 uppercase tracking-wide mb-4">Patreon</h2>
-          <div className="bg-slate-800 border border-slate-700 rounded-xl p-4 space-y-3">
+          <div className="oc-card p-4 space-y-3">
             <div className="flex items-center gap-2">
               <span className="text-orange-400 text-lg">❤</span>
               <div>
@@ -418,7 +418,7 @@ export const SettingsPage: React.FC = () => {
               <button
                 onClick={() => handlePatreonConnect(true)}
                 disabled={patreonLoading}
-                className="px-3 py-2 bg-slate-700 hover:bg-slate-600 disabled:opacity-50 text-slate-300 text-xs rounded-lg transition-colors"
+                className="px-3 py-2 disabled:opacity-50 text-xs rounded-lg transition-colors" style={{ background: "var(--oc-surface2)", border: "1px solid var(--oc-border)", color: "var(--oc-muted)" }}
               >
                 I am the creator/developer
               </button>
@@ -429,7 +429,7 @@ export const SettingsPage: React.FC = () => {
         {/* Memory Bank */}
         <section>
           <h2 className="text-sm font-semibold text-slate-300 uppercase tracking-wide mb-4">Memory Bank</h2>
-          <div className="bg-slate-800 border border-slate-700 rounded-xl p-4 space-y-3">
+          <div className="oc-card p-4 space-y-3">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <Brain size={16} className="text-purple-400" />
@@ -461,7 +461,7 @@ export const SettingsPage: React.FC = () => {
         {/* Skills */}
         <section>
           <h2 className="text-sm font-semibold text-slate-300 uppercase tracking-wide mb-4">Skills</h2>
-          <div className="bg-slate-800 border border-slate-700 rounded-xl p-4">
+          <div className="oc-card p-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <Sparkles size={16} className="text-blue-400" />
@@ -482,7 +482,7 @@ export const SettingsPage: React.FC = () => {
         {/* Credits */}
         <section>
           <h2 className="text-sm font-semibold text-slate-300 uppercase tracking-wide mb-4">Credits &amp; Creator</h2>
-          <div className="bg-slate-800 border border-slate-700 rounded-xl overflow-hidden">
+          <div className="oc-card overflow-hidden">
             {/* LLC Logo Banner */}
             <div className="relative w-full h-36 bg-gradient-to-br from-green-900/40 to-emerald-900/40 flex items-center justify-center overflow-hidden">
               <img
@@ -538,7 +538,7 @@ export const SettingsPage: React.FC = () => {
         {/* About */}
         <section>
           <h2 className="text-sm font-semibold text-slate-300 uppercase tracking-wide mb-4">About</h2>
-          <div className="bg-slate-800 border border-slate-700 rounded-xl p-4 flex gap-3">
+          <div className="oc-card p-4 flex gap-3">
             <Info size={20} className="text-blue-400 shrink-0 mt-0.5" />
             <div>
               <p className="text-white font-medium text-sm">Openclaw MultiModel Controller</p>
@@ -580,7 +580,7 @@ const ToggleSetting: React.FC<{
   checked: boolean;
   onChange: (value: boolean) => void;
 }> = ({ label, description, checked, onChange }) => (
-  <div className="flex items-center justify-between bg-slate-800 border border-slate-700 rounded-xl px-4 py-3">
+  <div className="flex items-center justify-between oc-card px-4 py-3">
     <div>
       <div className="text-sm text-white font-medium">{label}</div>
       {description && <div className="text-xs text-slate-400 mt-0.5">{description}</div>}

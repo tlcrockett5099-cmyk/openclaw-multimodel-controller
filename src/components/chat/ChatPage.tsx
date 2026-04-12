@@ -5,7 +5,7 @@ import type { Message } from '../../types';
 import { v4 as uuidv4 } from 'uuid';
 import {
   Send, Plus, Bot, User, ChevronDown,
-  AlertCircle, Loader2, MessageSquarePlus, X, Star,
+  AlertCircle, MessageSquarePlus, X, Star,
   Camera, Volume2, VolumeX, Edit2, Brain, GripHorizontal,
 } from 'lucide-react';
 import { getProviderTemplate } from '../../providers/templates';
@@ -25,8 +25,6 @@ const SUGGESTION_CHIPS = [
   'Plan my day',
   'Give me ideas',
 ];
-
-const MEMORY_SAVED_FEEDBACK_MS = 2000;
 
 const MarkdownText: React.FC<{ content: string }> = ({ content }) => {
   const lines = content.split('\n');
@@ -220,12 +218,12 @@ export const ChatPage: React.FC = () => {
   }
 
   return (
-    <div className="flex flex-1 h-full overflow-hidden">
+    <div className="flex flex-1 h-full overflow-hidden" style={{ background: 'transparent' }}>
       {/* Conversation sidebar */}
       {showSidebar && (
-        <aside className="w-56 shrink-0 border-r border-slate-700 bg-slate-900 flex flex-col overflow-hidden">
-          <div className="flex items-center justify-between px-3 py-3 border-b border-slate-700">
-            <span className="text-xs font-semibold text-slate-400 uppercase tracking-wide">Chats</span>
+        <aside className="w-56 shrink-0 flex flex-col overflow-hidden" style={{ background: 'var(--oc-surface)', borderRight: '1px solid var(--oc-border)' }}>
+          <div className="flex items-center justify-between px-3 py-3" style={{ borderBottom: '1px solid var(--oc-border)' }}>
+            <span className="text-xs font-semibold uppercase tracking-widest" style={{ color: 'var(--oc-teal)', letterSpacing: '0.1em' }}>Chats</span>
             <button
               onClick={handleNewChat}
               className="p-1 hover:bg-slate-700 rounded text-slate-400 hover:text-white transition-colors"
@@ -275,7 +273,7 @@ export const ChatPage: React.FC = () => {
       {/* Main chat area */}
       <div className="flex-1 flex flex-col overflow-hidden">
         {/* Chat header */}
-        <div className="flex items-center gap-3 px-4 py-3 border-b border-slate-700 bg-slate-900 shrink-0">
+        <div className="flex items-center gap-3 px-4 py-3 shrink-0 relative" style={{ background: 'var(--oc-surface)', borderBottom: '1px solid var(--oc-border)' }}>
           <button
             onClick={() => setShowSidebar((v) => !v)}
             className="hidden md:flex p-1.5 rounded hover:bg-slate-700 text-slate-400 hover:text-white transition-colors"
@@ -347,7 +345,7 @@ export const ChatPage: React.FC = () => {
         })()}
 
         {/* Messages */}
-        <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4" onClick={() => setShowProviderPicker(false)}>
+        <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4" style={{ background: 'transparent' }} onClick={() => setShowProviderPicker(false)}>
           {!activeConversation || activeConversation.messages.length === 0 ? (
             <div className="flex flex-col items-center justify-center h-full gap-5 text-center px-4">
               {/* Animated gradient orb */}
@@ -402,7 +400,7 @@ export const ChatPage: React.FC = () => {
         </div>
 
         {/* Input area */}
-        <div className="shrink-0 px-4 py-3 border-t border-slate-700 bg-slate-900">
+        <div className="shrink-0 px-4 py-3" style={{ background: 'var(--oc-surface)', borderTop: '1px solid var(--oc-border)' }}>
           {/* Pending image preview */}
           {pendingImage && (
             <div className="flex items-center gap-2 mb-2 max-w-4xl mx-auto">
@@ -433,8 +431,8 @@ export const ChatPage: React.FC = () => {
               onKeyDown={handleKeyDown}
               placeholder={`Message ${activeProvider?.name || ''}… (${settings.sendOnEnter ? 'Enter to send' : 'Ctrl+Enter to send'})`}
               rows={1}
-              className="flex-1 bg-slate-800 border border-slate-600 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-blue-500 resize-none min-h-[44px] max-h-32 overflow-y-auto"
-              style={{ lineHeight: '1.5' }}
+              className="flex-1 rounded-xl px-4 py-3 text-sm resize-none min-h-[44px] max-h-32 overflow-y-auto focus:outline-none"
+              style={{ lineHeight: '1.5', background: 'var(--oc-surface2)', border: '1px solid var(--oc-border)', color: 'var(--oc-text)' }}
               onInput={(e) => {
                 const el = e.currentTarget;
                 el.style.height = 'auto';
@@ -453,7 +451,7 @@ export const ChatPage: React.FC = () => {
               <button
                 onClick={handleSend}
                 disabled={!input.trim() || !activeProvider}
-                className="p-3 bg-blue-600 hover:bg-blue-700 disabled:opacity-40 disabled:cursor-not-allowed text-white rounded-xl transition-colors shrink-0"
+                className="p-3 rounded-xl shrink-0 font-semibold transition-all disabled:opacity-30 disabled:cursor-not-allowed oc-btn-primary"
                 title="Send"
               >
                 <Send size={16} />
@@ -517,7 +515,7 @@ export const ChatPage: React.FC = () => {
       {showMobileChats && (
         <div className="md:hidden fixed inset-0 z-50 flex flex-col justify-end">
           <div className="flex-1 bg-black/50" onClick={() => setShowMobileChats(false)} />
-          <div className="bg-slate-900 border-t border-slate-700 rounded-t-2xl animate-slide-in-bottom max-h-[70vh] flex flex-col">
+          <div className="rounded-t-2xl animate-oc-up max-h-[70vh] flex flex-col oc-glass-strong" style={{ borderTop: '1px solid rgba(20,184,166,0.25)' }}>
             <div className="flex justify-center pt-2 pb-1 shrink-0">
               <GripHorizontal size={20} className="text-slate-600" />
             </div>
@@ -592,96 +590,108 @@ const MessageBubble: React.FC<{
   const handleSaveMemory = () => {
     onSaveMemory?.(message.content);
     setMemorySaved(true);
-    setTimeout(() => setMemorySaved(false), MEMORY_SAVED_FEEDBACK_MS);
+    setTimeout(() => setMemorySaved(false), 2000);
   };
 
   return (
     <div
-      className={`flex gap-3 group ${isUser ? 'flex-row-reverse' : ''}`}
+      className={`flex gap-3 group animate-oc-fade ${isUser ? 'flex-row-reverse' : ''}`}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
       {/* Avatar */}
-      <div className={`w-8 h-8 rounded-full shrink-0 flex items-center justify-center ${
-        isUser ? 'bg-blue-600' : 'bg-slate-700'
-      }`}>
-        {isUser ? <User size={14} className="text-white" /> : <Bot size={14} className="text-slate-300" />}
+      <div className={`w-8 h-8 rounded-xl shrink-0 flex items-center justify-center relative`}
+        style={isUser ? {
+          background: 'linear-gradient(135deg, var(--oc-teal-dark), var(--oc-cyan))',
+          boxShadow: '0 0 12px rgba(20,184,166,0.3)',
+        } : {
+          background: 'var(--oc-surface2)',
+          border: '1px solid var(--oc-border)',
+        }}>
+        {isUser
+          ? <User size={14} className="text-white" />
+          : <Bot size={14} style={{ color: 'var(--oc-teal)' }} />
+        }
       </div>
 
-      <div className={`flex flex-col gap-1 max-w-[80%] ${isUser ? 'items-end' : ''}`}>
-        {/* Provider name */}
+      <div className={`flex flex-col gap-1.5 max-w-[78%] ${isUser ? 'items-end' : ''}`}>
+        {/* Provider label for AI */}
         {!isUser && message.providerName && (
-          <span className="text-xs text-slate-500 px-1">{message.providerName}</span>
+          <span className="text-xs px-1 font-medium" style={{ color: 'var(--oc-teal)', opacity: 0.8 }}>
+            {message.providerName}
+          </span>
         )}
 
         {/* Bubble */}
-        <div className={`rounded-2xl px-4 py-2.5 ${fontClass} ${
-          isUser
-            ? 'bg-blue-600 text-white rounded-tr-sm'
-            : message.error
-            ? 'bg-red-900/40 text-red-300 border border-red-800'
-            : 'bg-slate-800 text-slate-100 rounded-tl-sm'
-        }`}>
+        <div
+          className={`rounded-2xl px-4 py-3 ${fontClass} relative`}
+          style={isUser ? {
+            background: 'linear-gradient(135deg, var(--oc-teal-dark), rgba(6,182,212,0.8))',
+            color: 'white',
+            borderRadius: '18px 18px 4px 18px',
+            boxShadow: '0 4px 20px rgba(20,184,166,0.2)',
+          } : message.error ? {
+            background: 'rgba(239,68,68,0.1)',
+            border: '1px solid rgba(239,68,68,0.3)',
+            color: '#fca5a5',
+            borderRadius: '18px 18px 18px 4px',
+          } : {
+            background: 'var(--oc-surface2)',
+            border: '1px solid var(--oc-border)',
+            borderLeft: '3px solid var(--oc-teal)',
+            color: 'var(--oc-text)',
+            borderRadius: '18px 18px 18px 4px',
+          }}
+        >
           {message.loading ? (
-            <div className="flex items-center gap-2 text-slate-400">
-              <Loader2 size={14} className="animate-spin" />
-              <span className="text-xs">Thinking…</span>
+            <div className="flex items-center gap-2 py-1">
+              <span className="w-2 h-2 rounded-full animate-oc-typing" style={{ background: 'var(--oc-teal)' }} />
+              <span className="w-2 h-2 rounded-full animate-oc-typing-2" style={{ background: 'var(--oc-teal)' }} />
+              <span className="w-2 h-2 rounded-full animate-oc-typing-3" style={{ background: 'var(--oc-teal)' }} />
             </div>
           ) : message.error ? (
             <div className="flex items-start gap-2">
-              <AlertCircle size={14} className="shrink-0 mt-0.5" />
+              <AlertCircle size={14} className="shrink-0 mt-0.5" style={{ color: '#f87171' }} />
               <span>{message.content}</span>
             </div>
           ) : (
-            <MarkdownText content={message.content} />
-          )}
-          {message.imageUrl && (
-            <img
-              src={message.imageUrl}
-              alt="Attached"
-              className="mt-2 max-w-xs rounded-lg border border-slate-600 cursor-pointer"
-              onClick={() => onEditImage?.(message.imageUrl!)}
-            />
+            <>
+              {message.imageUrl && (
+                <img src={message.imageUrl} alt="Attached" className="max-w-full rounded-xl mb-2 max-h-48 object-cover cursor-pointer border border-white/20"
+                  onClick={() => onEditImage?.(message.imageUrl!)} />
+              )}
+              <MarkdownText content={message.content} />
+            </>
           )}
         </div>
 
         {/* Actions row */}
-        <div className={`flex items-center gap-1 px-1 ${isUser ? 'flex-row-reverse' : ''}`}>
-          {showTimestamp && (
-            <span className="text-xs text-slate-600">
-              {new Date(message.timestamp).toLocaleTimeString()}
+        <div className={`flex items-center gap-1.5 transition-opacity ${hovered || isSpeakingThis ? 'opacity-100' : 'opacity-0'} ${isUser ? 'flex-row-reverse' : ''}`}>
+          {showTimestamp && message.timestamp && (
+            <span className="text-xs mr-1" style={{ color: 'var(--oc-muted)' }}>
+              {new Date(message.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
             </span>
           )}
-          {!isUser && (
-            <div className={`flex items-center gap-1 transition-opacity ${hovered || message.starred ? 'opacity-100' : 'opacity-0'}`}>
-              {onSpeak && (
-                <button
-                  onClick={onSpeak}
-                  title={isSpeakingThis ? 'Stop' : 'Read aloud'}
-                  className="p-1 text-slate-500 hover:text-blue-400"
-                >
-                  {isSpeakingThis ? <VolumeX size={12}/> : <Volume2 size={12}/>}
-                </button>
-              )}
-              {onStar && (
-                <button
-                  onClick={onStar}
-                  title={message.starred ? 'Unstar' : 'Star message'}
-                  className={`p-0.5 ${message.starred ? 'text-amber-400' : 'text-slate-500 hover:text-amber-400'}`}
-                >
-                  <Star size={13} className={message.starred ? 'fill-amber-400' : ''} />
-                </button>
-              )}
-              {onSaveMemory && !message.loading && message.content && (
-                <button
-                  onClick={handleSaveMemory}
-                  title="Save as Memory"
-                  className={`p-1 transition-colors ${memorySaved ? 'text-purple-400' : 'text-slate-500 hover:text-purple-400'}`}
-                >
-                  <Brain size={12} />
-                </button>
-              )}
-            </div>
+          {onStar && (
+            <button onClick={onStar} className="p-1.5 rounded-lg transition-all hover:scale-110"
+              style={{ color: message.starred ? 'var(--oc-pro)' : 'var(--oc-muted)', background: 'var(--oc-surface2)' }}
+              title="Star message">
+              <Star size={12} className={message.starred ? 'fill-current' : ''} />
+            </button>
+          )}
+          {onSpeak && (
+            <button onClick={onSpeak} className="p-1.5 rounded-lg transition-all hover:scale-110"
+              style={{ color: isSpeakingThis ? 'var(--oc-teal)' : 'var(--oc-muted)', background: 'var(--oc-surface2)' }}
+              title={isSpeakingThis ? 'Stop speaking' : 'Read aloud'}>
+              {isSpeakingThis ? <VolumeX size={12} /> : <Volume2 size={12} />}
+            </button>
+          )}
+          {!isUser && onSaveMemory && (
+            <button onClick={handleSaveMemory} className="p-1.5 rounded-lg transition-all hover:scale-110"
+              style={{ color: memorySaved ? 'var(--oc-teal)' : 'var(--oc-muted)', background: 'var(--oc-surface2)' }}
+              title="Save as memory">
+              {memorySaved ? '✓' : <Brain size={12} />}
+            </button>
           )}
         </div>
       </div>

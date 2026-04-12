@@ -19,7 +19,7 @@ export const MemoryBankPage: React.FC = () => {
   return (
     <div className="flex flex-col h-full overflow-hidden">
       {/* Header */}
-      <div className="px-6 py-4 border-b border-slate-700 bg-slate-900 shrink-0">
+      <div className="px-6 py-4 shrink-0" style={{ borderBottom: '1px solid var(--oc-border)', background: 'var(--oc-surface)' }}>
         <div className="flex items-center gap-3 mb-1">
           <Brain size={20} className="text-purple-400" />
           <h1 className="text-xl font-bold text-white">Memory Bank</h1>
@@ -40,7 +40,7 @@ export const MemoryBankPage: React.FC = () => {
 
         {/* Add form */}
         {showAdd && (
-          <div className="bg-slate-800 border border-slate-700 rounded-xl p-4 space-y-3 animate-slide-in-bottom">
+          <div className="oc-card rounded-xl p-4 space-y-3 animate-oc-up">
             <input
               type="text"
               value={label}
@@ -96,7 +96,7 @@ export const MemoryBankPage: React.FC = () => {
             {[...memories].reverse().map((memory) => (
               <div
                 key={memory.id}
-                className="flex gap-3 bg-slate-800 border border-slate-700 rounded-xl p-4"
+                className="flex gap-3 oc-card rounded-xl p-4"
               >
                 <Brain size={16} className="text-purple-400 shrink-0 mt-0.5" />
                 <div className="flex-1 min-w-0">

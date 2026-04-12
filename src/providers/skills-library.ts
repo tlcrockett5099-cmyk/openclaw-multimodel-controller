@@ -15,6 +15,7 @@ export const BUILTIN_SKILLS: Skill[] = [
     icon: '✍️',
     tags: ['fiction', 'stories', 'narrative'],
     provider: 'all',
+    proOnly: true,
   },
   {
     id: 'technical-writer',
@@ -25,6 +26,7 @@ export const BUILTIN_SKILLS: Skill[] = [
     icon: '📝',
     tags: ['docs', 'manuals', 'guides'],
     provider: 'all',
+    proOnly: true,
   },
   {
     id: 'email-composer',
@@ -35,6 +37,7 @@ export const BUILTIN_SKILLS: Skill[] = [
     icon: '📧',
     tags: ['email', 'professional', 'communication'],
     provider: 'all',
+    proOnly: true,
   },
   {
     id: 'resume-writer',
@@ -45,6 +48,7 @@ export const BUILTIN_SKILLS: Skill[] = [
     icon: '📄',
     tags: ['resume', 'career', 'job'],
     provider: 'all',
+    proOnly: true,
   },
   {
     id: 'blog-writer',
@@ -55,6 +59,7 @@ export const BUILTIN_SKILLS: Skill[] = [
     icon: '📰',
     tags: ['blog', 'content', 'seo'],
     provider: 'all',
+    proOnly: true,
   },
   {
     id: 'copywriter',
@@ -65,6 +70,7 @@ export const BUILTIN_SKILLS: Skill[] = [
     icon: '💡',
     tags: ['marketing', 'ads', 'conversion'],
     provider: 'all',
+    proOnly: true,
   },
   {
     id: 'screenwriter',
@@ -75,6 +81,7 @@ export const BUILTIN_SKILLS: Skill[] = [
     icon: '🎬',
     tags: ['script', 'film', 'dialogue'],
     provider: 'all',
+    proOnly: true,
   },
   {
     id: 'poetry-generator',
@@ -85,6 +92,7 @@ export const BUILTIN_SKILLS: Skill[] = [
     icon: '🌸',
     tags: ['poetry', 'verse', 'lyrical'],
     provider: 'all',
+    proOnly: true,
   },
   {
     id: 'grammar-fixer',
@@ -95,6 +103,7 @@ export const BUILTIN_SKILLS: Skill[] = [
     icon: '🔍',
     tags: ['grammar', 'editing', 'proofreading'],
     provider: 'all',
+    proOnly: false,
   },
   {
     id: 'story-expander',
@@ -105,6 +114,7 @@ export const BUILTIN_SKILLS: Skill[] = [
     icon: '📖',
     tags: ['story', 'expand', 'narrative'],
     provider: 'all',
+    proOnly: false,
   },
 
   // ── Coding ────────────────────────────────────────────────────────────────
@@ -117,6 +127,7 @@ export const BUILTIN_SKILLS: Skill[] = [
     icon: '🔎',
     tags: ['review', 'quality', 'best-practices'],
     provider: 'all',
+    proOnly: false,
   },
   {
     id: 'debugger',
@@ -127,6 +138,7 @@ export const BUILTIN_SKILLS: Skill[] = [
     icon: '🐛',
     tags: ['debug', 'fix', 'errors'],
     provider: 'all',
+    proOnly: false,
   },
   {
     id: 'code-explainer',
@@ -137,6 +149,7 @@ export const BUILTIN_SKILLS: Skill[] = [
     icon: '💬',
     tags: ['explain', 'learn', 'understand'],
     provider: 'all',
+    proOnly: true,
   },
   {
     id: 'sql-expert',
@@ -147,6 +160,7 @@ export const BUILTIN_SKILLS: Skill[] = [
     icon: '🗄️',
     tags: ['sql', 'database', 'queries'],
     provider: 'all',
+    proOnly: true,
   },
   {
     id: 'python-expert',
@@ -157,6 +171,7 @@ export const BUILTIN_SKILLS: Skill[] = [
     icon: '🐍',
     tags: ['python', 'scripting', 'automation'],
     provider: 'all',
+    proOnly: true,
   },
   {
     id: 'javascript-expert',
@@ -167,6 +182,7 @@ export const BUILTIN_SKILLS: Skill[] = [
     icon: '⚡',
     tags: ['javascript', 'typescript', 'web'],
     provider: 'all',
+    proOnly: true,
   },
   {
     id: 'api-designer',
@@ -177,6 +193,7 @@ export const BUILTIN_SKILLS: Skill[] = [
     icon: '🔌',
     tags: ['api', 'rest', 'graphql'],
     provider: 'all',
+    proOnly: true,
   },
   {
     id: 'devops-helper',
@@ -187,6 +204,7 @@ export const BUILTIN_SKILLS: Skill[] = [
     icon: '⚙️',
     tags: ['devops', 'docker', 'kubernetes'],
     provider: 'all',
+    proOnly: true,
   },
   {
     id: 'security-auditor',
@@ -197,6 +215,7 @@ export const BUILTIN_SKILLS: Skill[] = [
     icon: '🔒',
     tags: ['security', 'vulnerabilities', 'owasp'],
     provider: 'all',
+    proOnly: true,
   },
   {
     id: 'test-writer',
@@ -207,6 +226,7 @@ export const BUILTIN_SKILLS: Skill[] = [
     icon: '✅',
     tags: ['testing', 'unit-tests', 'tdd'],
     provider: 'all',
+    proOnly: true,
   },
 
   // ── Research ──────────────────────────────────────────────────────────────
@@ -219,6 +239,7 @@ export const BUILTIN_SKILLS: Skill[] = [
     icon: '✔️',
     tags: ['facts', 'verification', 'accuracy'],
     provider: 'all',
+    proOnly: false,
   },
   {
     id: 'research-assistant',
@@ -229,6 +250,7 @@ export const BUILTIN_SKILLS: Skill[] = [
     icon: '🔬',
     tags: ['research', 'analysis', 'synthesis'],
     provider: 'all',
+    proOnly: false,
   },
   {
     id: 'data-analyst',
@@ -239,6 +261,7 @@ export const BUILTIN_SKILLS: Skill[] = [
     icon: '📊',
     tags: ['data', 'statistics', 'insights'],
     provider: 'all',
+    proOnly: true,
   },
   {
     id: 'market-researcher',
@@ -249,6 +272,7 @@ export const BUILTIN_SKILLS: Skill[] = [
     icon: '📈',
     tags: ['market', 'competition', 'trends'],
     provider: 'all',
+    proOnly: true,
   },
   {
     id: 'academic-summarizer',
@@ -259,6 +283,7 @@ export const BUILTIN_SKILLS: Skill[] = [
     icon: '🎓',
     tags: ['academic', 'papers', 'summary'],
     provider: 'all',
+    proOnly: true,
   },
   {
     id: 'citation-helper',
@@ -269,6 +294,7 @@ export const BUILTIN_SKILLS: Skill[] = [
     icon: '📚',
     tags: ['citations', 'bibliography', 'apa'],
     provider: 'all',
+    proOnly: true,
   },
 
   // ── Creative ──────────────────────────────────────────────────────────────
@@ -281,6 +307,7 @@ export const BUILTIN_SKILLS: Skill[] = [
     icon: '💭',
     tags: ['ideas', 'brainstorm', 'creative'],
     provider: 'all',
+    proOnly: false,
   },
   {
     id: 'idea-generator',
@@ -291,6 +318,7 @@ export const BUILTIN_SKILLS: Skill[] = [
     icon: '💡',
     tags: ['innovation', 'startup', 'products'],
     provider: 'all',
+    proOnly: false,
   },
   {
     id: 'name-creator',
@@ -301,6 +329,7 @@ export const BUILTIN_SKILLS: Skill[] = [
     icon: '🏷️',
     tags: ['naming', 'brand', 'identity'],
     provider: 'all',
+    proOnly: true,
   },
   {
     id: 'character-creator',
@@ -311,6 +340,7 @@ export const BUILTIN_SKILLS: Skill[] = [
     icon: '🎭',
     tags: ['character', 'fiction', 'roleplay'],
     provider: 'all',
+    proOnly: true,
   },
   {
     id: 'world-builder',
@@ -321,6 +351,7 @@ export const BUILTIN_SKILLS: Skill[] = [
     icon: '🌍',
     tags: ['worldbuilding', 'fantasy', 'lore'],
     provider: 'all',
+    proOnly: true,
   },
 
   // ── Productivity ──────────────────────────────────────────────────────────
@@ -333,6 +364,7 @@ export const BUILTIN_SKILLS: Skill[] = [
     icon: '📋',
     tags: ['planning', 'tasks', 'gtd'],
     provider: 'all',
+    proOnly: true,
   },
   {
     id: 'meeting-notes',
@@ -343,6 +375,7 @@ export const BUILTIN_SKILLS: Skill[] = [
     icon: '📝',
     tags: ['meetings', 'notes', 'actions'],
     provider: 'all',
+    proOnly: true,
   },
   {
     id: 'decision-helper',
@@ -353,6 +386,7 @@ export const BUILTIN_SKILLS: Skill[] = [
     icon: '⚖️',
     tags: ['decisions', 'analysis', 'strategy'],
     provider: 'all',
+    proOnly: true,
   },
   {
     id: 'goal-setter',
@@ -363,6 +397,7 @@ export const BUILTIN_SKILLS: Skill[] = [
     icon: '🎯',
     tags: ['goals', 'smart', 'achievement'],
     provider: 'all',
+    proOnly: true,
   },
   {
     id: 'habit-coach',
@@ -373,6 +408,7 @@ export const BUILTIN_SKILLS: Skill[] = [
     icon: '🔄',
     tags: ['habits', 'routine', 'behavior'],
     provider: 'all',
+    proOnly: true,
   },
 
   // ── Analysis ──────────────────────────────────────────────────────────────
@@ -385,6 +421,7 @@ export const BUILTIN_SKILLS: Skill[] = [
     icon: '📑',
     tags: ['documents', 'analysis', 'extraction'],
     provider: 'all',
+    proOnly: true,
   },
   {
     id: 'sentiment-analyzer',
@@ -395,6 +432,7 @@ export const BUILTIN_SKILLS: Skill[] = [
     icon: '😊',
     tags: ['sentiment', 'tone', 'emotions'],
     provider: 'all',
+    proOnly: true,
   },
   {
     id: 'trend-spotter',
@@ -405,6 +443,7 @@ export const BUILTIN_SKILLS: Skill[] = [
     icon: '📡',
     tags: ['trends', 'forecasting', 'patterns'],
     provider: 'all',
+    proOnly: true,
   },
   {
     id: 'competitor-analyst',
@@ -415,6 +454,7 @@ export const BUILTIN_SKILLS: Skill[] = [
     icon: '🕵️',
     tags: ['competitors', 'strategy', 'intelligence'],
     provider: 'all',
+    proOnly: true,
   },
 
   // ── Education ─────────────────────────────────────────────────────────────
@@ -427,6 +467,7 @@ export const BUILTIN_SKILLS: Skill[] = [
     icon: '🎒',
     tags: ['tutor', 'learning', 'teaching'],
     provider: 'all',
+    proOnly: false,
   },
   {
     id: 'math-teacher',
@@ -437,6 +478,7 @@ export const BUILTIN_SKILLS: Skill[] = [
     icon: '🔢',
     tags: ['math', 'algebra', 'calculus'],
     provider: 'all',
+    proOnly: false,
   },
   {
     id: 'science-explainer',
@@ -447,6 +489,7 @@ export const BUILTIN_SKILLS: Skill[] = [
     icon: '🧪',
     tags: ['science', 'physics', 'biology'],
     provider: 'all',
+    proOnly: true,
   },
   {
     id: 'history-guide',
@@ -457,6 +500,7 @@ export const BUILTIN_SKILLS: Skill[] = [
     icon: '🏛️',
     tags: ['history', 'culture', 'events'],
     provider: 'all',
+    proOnly: true,
   },
 
   // ── Health ────────────────────────────────────────────────────────────────
@@ -469,6 +513,7 @@ export const BUILTIN_SKILLS: Skill[] = [
     icon: '💪',
     tags: ['fitness', 'workout', 'exercise'],
     provider: 'all',
+    proOnly: true,
   },
   {
     id: 'nutrition-advisor',
@@ -479,6 +524,7 @@ export const BUILTIN_SKILLS: Skill[] = [
     icon: '🥗',
     tags: ['nutrition', 'diet', 'health'],
     provider: 'all',
+    proOnly: true,
   },
   {
     id: 'mental-wellness',
@@ -489,6 +535,7 @@ export const BUILTIN_SKILLS: Skill[] = [
     icon: '🧘',
     tags: ['mental health', 'wellness', 'mindfulness'],
     provider: 'all',
+    proOnly: true,
   },
   {
     id: 'medical-explainer',
@@ -499,6 +546,7 @@ export const BUILTIN_SKILLS: Skill[] = [
     icon: '🏥',
     tags: ['medical', 'health', 'terminology'],
     provider: 'all',
+    proOnly: true,
   },
 
   // ── Finance ───────────────────────────────────────────────────────────────
@@ -511,6 +559,7 @@ export const BUILTIN_SKILLS: Skill[] = [
     icon: '💰',
     tags: ['budget', 'savings', 'money'],
     provider: 'all',
+    proOnly: true,
   },
   {
     id: 'investment-explainer',
@@ -521,6 +570,7 @@ export const BUILTIN_SKILLS: Skill[] = [
     icon: '📈',
     tags: ['investing', 'stocks', 'finance'],
     provider: 'all',
+    proOnly: true,
   },
   {
     id: 'tax-helper',
@@ -531,6 +581,7 @@ export const BUILTIN_SKILLS: Skill[] = [
     icon: '🧾',
     tags: ['tax', 'deductions', 'filing'],
     provider: 'all',
+    proOnly: true,
   },
   {
     id: 'financial-planner',
@@ -541,6 +592,7 @@ export const BUILTIN_SKILLS: Skill[] = [
     icon: '🗺️',
     tags: ['planning', 'retirement', 'wealth'],
     provider: 'all',
+    proOnly: true,
   },
 
   // ── Language ──────────────────────────────────────────────────────────────
@@ -553,6 +605,7 @@ export const BUILTIN_SKILLS: Skill[] = [
     icon: '✏️',
     tags: ['grammar', 'language', 'writing'],
     provider: 'all',
+    proOnly: true,
   },
   {
     id: 'language-tutor',
@@ -563,6 +616,7 @@ export const BUILTIN_SKILLS: Skill[] = [
     icon: '🗣️',
     tags: ['language learning', 'vocabulary', 'grammar'],
     provider: 'all',
+    proOnly: true,
   },
   {
     id: 'translation-expert',
@@ -573,6 +627,7 @@ export const BUILTIN_SKILLS: Skill[] = [
     icon: '🌐',
     tags: ['translation', 'multilingual', 'localization'],
     provider: 'all',
+    proOnly: true,
   },
   {
     id: 'writing-style-coach',
@@ -583,6 +638,7 @@ export const BUILTIN_SKILLS: Skill[] = [
     icon: '🖊️',
     tags: ['style', 'voice', 'writing'],
     provider: 'all',
+    proOnly: true,
   },
 
   // ── Gemini Gems ───────────────────────────────────────────────────────────
@@ -595,6 +651,7 @@ export const BUILTIN_SKILLS: Skill[] = [
     icon: '💎',
     tags: ['research', 'gemini', 'deep-analysis'],
     provider: 'gemini',
+    proOnly: true,
   },
   {
     id: 'gemini-code-gem',
@@ -605,6 +662,7 @@ export const BUILTIN_SKILLS: Skill[] = [
     icon: '💎',
     tags: ['coding', 'gemini', 'development'],
     provider: 'gemini',
+    proOnly: true,
   },
   {
     id: 'gemini-writing-gem',
@@ -615,6 +673,7 @@ export const BUILTIN_SKILLS: Skill[] = [
     icon: '💎',
     tags: ['writing', 'gemini', 'long-form'],
     provider: 'gemini',
+    proOnly: true,
   },
   {
     id: 'gemini-learning-gem',
@@ -625,6 +684,7 @@ export const BUILTIN_SKILLS: Skill[] = [
     icon: '💎',
     tags: ['learning', 'gemini', 'education'],
     provider: 'gemini',
+    proOnly: true,
   },
   {
     id: 'gemini-creative-gem',
@@ -635,6 +695,7 @@ export const BUILTIN_SKILLS: Skill[] = [
     icon: '💎',
     tags: ['creative', 'gemini', 'multimodal'],
     provider: 'gemini',
+    proOnly: true,
   },
 ];
 

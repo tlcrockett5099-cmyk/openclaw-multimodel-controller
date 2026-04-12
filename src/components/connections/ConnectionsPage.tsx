@@ -62,7 +62,7 @@ export const ConnectionsPage: React.FC = () => {
   return (
     <div className="flex flex-col h-full overflow-hidden">
       {/* Header */}
-      <div className="px-4 sm:px-6 py-4 border-b border-slate-700 bg-slate-900 shrink-0">
+      <div className="px-4 sm:px-6 py-4 shrink-0" style={{ borderBottom: '1px solid var(--oc-border)', background: 'var(--oc-surface)' }}>
         <div className="flex items-center justify-between gap-3">
           <div>
             <h1 className="text-xl font-bold text-white">AI Connections</h1>
@@ -82,7 +82,8 @@ export const ConnectionsPage: React.FC = () => {
             <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500" />
             <input type="search" value={search} onChange={e => setSearch(e.target.value)}
               placeholder="Search connections…"
-              className="w-full bg-slate-800 border border-slate-700 rounded-xl pl-9 pr-3 py-2 text-white text-sm placeholder-slate-500 focus:outline-none focus:border-blue-500" />
+              className="w-full rounded-xl pl-9 pr-3 py-2 text-sm placeholder-slate-500 focus:outline-none"
+              style={{ background: 'var(--oc-surface2)', border: '1px solid var(--oc-border)', color: 'var(--oc-text)' }} />
           </div>
         )}
       </div>
@@ -99,9 +100,7 @@ export const ConnectionsPage: React.FC = () => {
               const hasOK     = connected.some(p => testResults[p.id] && testResults[p.id] !== 'loading' && (testResults[p.id] as { success: boolean }).success);
               return (
                 <button key={tpl.type} onClick={() => openAdd(tpl.type)}
-                  className="group relative flex items-center gap-3 px-3 py-3 bg-slate-800 hover:bg-slate-750
-                    border border-slate-700 hover:border-slate-500 rounded-xl transition-all text-left
-                    active:scale-[0.97]">
+                  className="group relative flex items-center gap-3 px-3 py-3 rounded-xl transition-all text-left active:scale-[0.97] oc-card oc-card-hover">
                   <div className="w-9 h-9 rounded-xl flex items-center justify-center text-lg shrink-0 shadow-inner"
                     style={{ backgroundColor: tpl.color + '33', border: `1px solid ${tpl.color}55` }}>
                     {tpl.icon}
@@ -139,10 +138,16 @@ export const ConnectionsPage: React.FC = () => {
                   <div key={provider.id}
                     className={`rounded-xl border overflow-hidden transition-all duration-200 ${
                       provider.enabled
-                        ? 'border-slate-700 bg-slate-800/80'
-                        : 'border-slate-800 bg-slate-900/60 opacity-60'
+                        ? ''
+                        : 'opacity-60'
                     }`}
-                    style={{ borderLeft: `3px solid ${provider.color}` }}>
+                    style={{
+                      borderLeft: `3px solid ${provider.color}`,
+                      background: provider.enabled ? 'var(--oc-surface2)' : 'var(--oc-surface)',
+                      border: provider.enabled ? `1px solid var(--oc-border)` : `1px solid rgba(26,58,74,0.4)`,
+                      borderLeftColor: provider.color,
+                      borderLeftWidth: 3,
+                    }}>
                     <div className="flex items-center gap-3 px-4 py-3">
                       {/* Icon */}
                       <span className="text-xl shrink-0">{tpl?.icon || '🤖'}</span>
@@ -181,7 +186,7 @@ export const ConnectionsPage: React.FC = () => {
 
                     {/* Expanded */}
                     {expanded && (
-                      <div className="px-4 pb-4 pt-1 border-t border-slate-700 space-y-3">
+                      <div className="px-4 pb-4 pt-1 space-y-3" style={{ borderTop: '1px solid var(--oc-border)' }}>
                         <div className="grid grid-cols-2 gap-x-4 gap-y-1 text-xs">
                           {provider.baseUrl && <><span className="text-slate-500">Endpoint</span><span className="text-slate-300 truncate">{provider.baseUrl}</span></>}
                           <span className="text-slate-500">Temperature</span><span className="text-slate-300">{provider.temperature ?? 0.7}</span>
@@ -226,7 +231,7 @@ export const ConnectionsPage: React.FC = () => {
         ) : (
           /* Empty state */
           <div className="text-center py-16 space-y-4 text-slate-500">
-            <div className="w-20 h-20 mx-auto rounded-3xl bg-slate-800 flex items-center justify-center">
+            <div className="w-20 h-20 mx-auto rounded-3xl flex items-center justify-center" style={{ background: 'var(--oc-surface2)' }}>
               <WifiOff size={36} className="opacity-40"/>
             </div>
             <div>
